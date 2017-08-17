@@ -1,0 +1,110 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPersonneLabel" jhiTranslate="assistanceApp.personne.home.createOrEditLabel">Create or edit a Personne</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]=true>
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="personne.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.prenom" for="field_prenom">Prenom</label>
+            <input type="text" class="form-control" name="prenom" id="field_prenom"
+                [(ngModel)]="personne.prenom" required />
+            <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.prenom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="personne.nom" required />
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.telPrincipal" for="field_telPrincipal">Tel Principal</label>
+            <input type="number" class="form-control" name="telPrincipal" id="field_telPrincipal"
+                [(ngModel)]="personne.telPrincipal" required />
+            <div [hidden]="!(editForm.controls.telPrincipal?.dirty && editForm.controls.telPrincipal?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.telPrincipal?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.telPrincipal?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.autreTel" for="field_autreTel">Autre Tel</label>
+            <input type="number" class="form-control" name="autreTel" id="field_autreTel"
+                [(ngModel)]="personne.autreTel"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.fax" for="field_fax">Fax</label>
+            <input type="number" class="form-control" name="fax" id="field_fax"
+                [(ngModel)]="personne.fax"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.mailPrincipal" for="field_mailPrincipal">Mail Principal</label>
+            <input type="text" class="form-control" name="mailPrincipal" id="field_mailPrincipal"
+                [(ngModel)]="personne.mailPrincipal"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.autreMail" for="field_autreMail">Autre Mail</label>
+            <input type="text" class="form-control" name="autreMail" id="field_autreMail"
+                [(ngModel)]="personne.autreMail"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.adresse" for="field_adresse">Adresse</label>
+            <input type="text" class="form-control" name="adresse" id="field_adresse"
+                [(ngModel)]="personne.adresse" required />
+            <div [hidden]="!(editForm.controls.adresse?.dirty && editForm.controls.adresse?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.adresse?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.latitude" for="field_latitude">Latitude</label>
+            <input type="text" class="form-control" name="latitude" id="field_latitude"
+                [(ngModel)]="personne.latitude"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.personne.longitude" for="field_longitude">Longitude</label>
+            <input type="text" class="form-control" name="longitude" id="field_longitude"
+                [(ngModel)]="personne.longitude"  />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="assistanceApp.personne.ville" for="field_ville">Ville</label>
+            <select class="form-control" id="field_ville" name="ville" [(ngModel)]="personne.ville">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="sysVilleOption.id === personne.ville?.id ? personne.ville : sysVilleOption" *ngFor="let sysVilleOption of villes; trackBy: trackSysVilleById">{{sysVilleOption.nom}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

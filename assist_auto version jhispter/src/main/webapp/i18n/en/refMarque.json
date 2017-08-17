@@ -1,0 +1,22 @@
+{
+    "assistanceApp": {
+        "refMarque" : {
+            "home": {
+                "title": "Ref Marques",
+                "createLabel": "Create a new Ref Marque",
+                "createOrEditLabel": "Create or edit a Ref Marque",
+                "search": "Search for Ref Marque"
+            },
+            "created": "A new Ref Marque is created with identifier {{ param }}",
+            "updated": "A Ref Marque is updated with identifier {{ param }}",
+            "deleted": "A Ref Marque is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ref Marque {{ id }}?"
+            },
+            "detail": {
+                "title": "Ref Marque"
+            },
+            "nom": "Nom"
+        }
+    }
+}

@@ -1,0 +1,57 @@
+
+<div *ngIf="contrat">
+    <h2><span jhiTranslate="assistanceApp.contrat.detail.title">Contrat</span> {{contrat.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.contrat.numero">Numero</span></dt>
+        <dd>
+            <span>{{contrat.numero}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.debut">Debut</span></dt>
+        <dd>
+            <span>{{contrat.debut | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.fin">Fin</span></dt>
+        <dd>
+            <span>{{contrat.fin | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.voiture">Voiture</span></dt>
+        <dd>
+            <div *ngIf="contrat.voiture">
+                <a [routerLink]="['/voiture', contrat.voiture?.id]">{{contrat.voiture?.immatriculation}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.assure">Assure</span></dt>
+        <dd>
+            <div *ngIf="contrat.assure">
+                <a [routerLink]="['/assuree', contrat.assure?.id]">{{contrat.assure?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.pack">Pack</span></dt>
+        <dd>
+            <div *ngIf="contrat.pack">
+                <a [routerLink]="['/ref-pack', contrat.pack?.id]">{{contrat.pack?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contrat.compagnie">Compagnie</span></dt>
+        <dd>
+            <div *ngIf="contrat.compagnie">
+                <a [routerLink]="['/ref-compagnie', contrat.compagnie?.id]">{{contrat.compagnie?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'contrat/'+ contrat.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

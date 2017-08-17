@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ville",
+            "otherEntityName": "sysVille",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "personne"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "prenom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "telPrincipal",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "autreTel",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "fax",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "mailPrincipal",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "autreMail",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170808072637",
+    "entityTableName": "personne",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

@@ -1,0 +1,23 @@
+{
+    "assistanceApp": {
+        "sysVille" : {
+            "home": {
+                "title": "SysVilles",
+                "createLabel": "Créer un nouveau Sys Ville",
+                "createOrEditLabel": "Créer ou éditer un Sys Ville",
+                "search": "Recherche pour Sys Ville"
+            },
+            "created": "Un nouveau Sys Ville a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Sys Ville avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Sys Ville avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Sys Ville {{ id }} ?"
+            },
+            "detail": {
+                "title": "Sys Ville"
+            },
+            "nom": "Nom",
+            "gouvernorat": "Gouvernorat"
+        }
+    }
+}

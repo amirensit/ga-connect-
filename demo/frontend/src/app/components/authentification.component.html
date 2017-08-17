@@ -1,0 +1,31 @@
+<form   >
+
+        <div class="md-form">
+            
+            <input type="text" id="form4"  class="form-control"  name="username" [(ngModel)]="model.login" >
+            <label for="form4">login!!!!!</label>
+            
+            
+        </div>
+
+         <div class="md-form">
+            
+            <input type="password" id="form4"  class="form-control" name="password" [(ngModel)]="model.password" >
+            <label for="form4">password</label>
+        </div>
+
+         
+        <div class="text-center">
+            <button class="btn btn-deep-purple"  (click)="login()" >Login</button>
+        </div>
+
+        <div >
+            {{loading}}
+            
+        </div>
+
+        <div *ngIf="!loading" >     {{error}}     </div>
+
+      
+
+</form>

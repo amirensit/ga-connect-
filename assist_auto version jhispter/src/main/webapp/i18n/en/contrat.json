@@ -1,0 +1,28 @@
+{
+    "assistanceApp": {
+        "contrat" : {
+            "home": {
+                "title": "Contrats",
+                "createLabel": "Create a new Contrat",
+                "createOrEditLabel": "Create or edit a Contrat",
+                "search": "Search for Contrat"
+            },
+            "created": "A new Contrat is created with identifier {{ param }}",
+            "updated": "A Contrat is updated with identifier {{ param }}",
+            "deleted": "A Contrat is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Contrat {{ id }}?"
+            },
+            "detail": {
+                "title": "Contrat"
+            },
+            "numero": "Numero",
+            "debut": "Debut",
+            "fin": "Fin",
+            "voiture": "Voiture",
+            "assure": "Assure",
+            "pack": "Pack",
+            "compagnie": "Compagnie"
+        }
+    }
+}

@@ -1,0 +1,103 @@
+<div>
+    <h2>
+        <span jhiTranslate="assistanceApp.dossierRmq.home.title">Dossier Rmqs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-dossier-rmq" [routerLink]="['/', { outlets: { popup: ['dossier-rmq-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="assistanceApp.dossierRmq.home.createLabel">
+            Create new Dossier Rmq
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'assistanceApp.dossierRmq.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="dossierRmqs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.reference">Reference</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.distance">Distance</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.observation">Observation</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.assuree">Assuree</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.typeService">Type Service</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.lieu">Lieu</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.destination">Destination</span></th>
+            <th><span jhiTranslate="assistanceApp.dossierRmq.remorqueur">Remorqueur</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dossierRmq of dossierRmqs ;trackBy: trackId">
+                <td><a [routerLink]="['../dossier-rmq', dossierRmq.id ]">{{dossierRmq.id}}</a></td>
+                <td>{{dossierRmq.reference}}</td>
+                <td>{{dossierRmq.distance}}</td>
+                <td>{{dossierRmq.observation}}</td>
+                <td>
+                    <div *ngIf="dossierRmq.assuree">
+                        <a [routerLink]="['../assuree', dossierRmq.assuree?.id ]" >{{dossierRmq.assuree?.personne.nom}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dossierRmq.typeService">
+                        <a [routerLink]="['../ref-type-service', dossierRmq.typeService?.id ]" >{{dossierRmq.typeService?.nom}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dossierRmq.lieu">
+                        <a [routerLink]="['../sys-ville', dossierRmq.lieu?.id ]" >{{dossierRmq.lieu?.nom}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dossierRmq.destination">
+                        <a [routerLink]="['../sys-ville', dossierRmq.destination?.id ]" >{{dossierRmq.destination?.nom}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dossierRmq.remorqueur">
+                        <a [routerLink]="['../ref-remorqueur', dossierRmq.remorqueur?.id ]" >{{dossierRmq.remorqueur?.raisonSociale}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../dossier-rmq', dossierRmq.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dossier-rmq/'+ dossierRmq.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dossier-rmq/'+ dossierRmq.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

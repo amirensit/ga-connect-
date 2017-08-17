@@ -1,0 +1,29 @@
+{
+    "assistanceApp": {
+        "dossierRmq" : {
+            "home": {
+                "title": "Dossier Rmqs",
+                "createLabel": "Create a new Dossier Rmq",
+                "createOrEditLabel": "Create or edit a Dossier Rmq",
+                "search": "Search for Dossier Rmq"
+            },
+            "created": "A new Dossier Rmq is created with identifier {{ param }}",
+            "updated": "A Dossier Rmq is updated with identifier {{ param }}",
+            "deleted": "A Dossier Rmq is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Dossier Rmq {{ id }}?"
+            },
+            "detail": {
+                "title": "Dossier Rmq"
+            },
+            "reference": "Reference",
+            "distance": "Distance",
+            "observation": "Observation",
+            "assuree": "Assuree",
+            "typeService": "Type Service",
+            "lieu": "Lieu",
+            "destination": "Destination",
+            "remorqueur": "Remorqueur"
+        }
+    }
+}

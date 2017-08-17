@@ -1,0 +1,47 @@
+
+<div *ngIf="refPack">
+    <h2><span jhiTranslate="assistanceApp.refPack.detail.title">Ref Pack</span> {{refPack.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.refPack.nom">Nom</span></dt>
+        <dd>
+            <span>{{refPack.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refPack.description">Description</span></dt>
+        <dd>
+            <span>{{refPack.description}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refPack.maxServices">Max Services</span></dt>
+        <dd>
+            <span>{{refPack.maxServices}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refPack.maxKil">Max Kil</span></dt>
+        <dd>
+            <span>{{refPack.maxKil}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refPack.isBloque">Is Bloque</span></dt>
+        <dd>
+            <span>{{refPack.isBloque}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refPack.typeService">Type Service</span></dt>
+        <dd>
+            <span *ngFor="let typeService of refPack.typeServices; let last = last">
+                <a [routerLink]="['/ref-type-service', typeService?.id ]">{{typeService.nom}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'ref-pack/'+ refPack.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "changelogDate": "20170808072642",
+    "entityTableName": "ref_marque",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

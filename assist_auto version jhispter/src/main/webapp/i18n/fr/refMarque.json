@@ -1,0 +1,22 @@
+{
+    "assistanceApp": {
+        "refMarque" : {
+            "home": {
+                "title": "RefMarques",
+                "createLabel": "Créer un nouveau Ref Marque",
+                "createOrEditLabel": "Créer ou éditer un Ref Marque",
+                "search": "Recherche pour Ref Marque"
+            },
+            "created": "Un nouveau Ref Marque a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ref Marque avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ref Marque avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ref Marque {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ref Marque"
+            },
+            "nom": "Nom"
+        }
+    }
+}

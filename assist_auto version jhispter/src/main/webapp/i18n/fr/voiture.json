@@ -1,0 +1,26 @@
+{
+    "assistanceApp": {
+        "voiture" : {
+            "home": {
+                "title": "Voitures",
+                "createLabel": "Créer un nouveau Voiture",
+                "createOrEditLabel": "Créer ou éditer un Voiture",
+                "search": "Recherche pour Voiture"
+            },
+            "created": "Un nouveau Voiture a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Voiture avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Voiture avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Voiture {{ id }} ?"
+            },
+            "detail": {
+                "title": "Voiture"
+            },
+            "immatriculation": "Immatriculation",
+            "miseCirculation": "Mise Circulation",
+            "puissanceFiscale": "Puissance Fiscale",
+            "marque": "Marque",
+            "contrat": "Contrat"
+        }
+    }
+}

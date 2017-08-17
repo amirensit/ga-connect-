@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "marque",
+            "otherEntityName": "refMarque",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "contrat",
+            "otherEntityName": "contrat",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "voiture"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "immatriculation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "\\d{4}TU\\d+"
+        },
+        {
+            "fieldName": "miseCirculation",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "puissanceFiscale",
+            "fieldType": "Long"
+        }
+    ],
+    "changelogDate": "20170808072641",
+    "entityTableName": "voiture",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

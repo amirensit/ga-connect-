@@ -1,0 +1,274 @@
+<div class="main-content">
+     <div *ngIf="d==false" class="alert alert-danger" style="text-align: center">Vous ne pouvez pas supprimer ce role!!<br></div>
+<div class="row">
+                <div class=" col-md-12">
+                    <div class="card card-nav-tabs" >
+                        <div class="card-header" data-background-color="orange" style="margin-right:1100px">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a href="#profile" data-toggle="tab">
+                                                <i class="material-icons">list</i>
+                                                Liste des roles
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#messages" data-toggle="tab">
+                                                <i class="material-icons">add_box</i>
+                                                Nouveau role
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile">
+                                  <table class="table table-hover" id="profile" [mfData]="pageRoles" #mf="mfDataTable">
+                                          <thead class="text-danger">
+                                              
+                    <tr class="col-md-6"><i class="material-icons">search</i><input style="margin-top: -70px;margin-left: 20px;" class="form-control" type="text" [(ngModel)]="roleFilter.libelle" placeholder="chercher par role"></tr>
+                                   
+                                              
+                                              <tr>
+                                                 <th><mfDefaultSorter by="libelle">Libellé</mfDefaultSorter></th>
+                                                 <th>Modules</th>
+                                                 <th>Action</th>
+                                       
+                                       
+                                              </tr>
+                                    
+                                            </thead>
+                                            <tbody>
+                                                 <tr  *ngFor="let role of mf.data | filterBy: roleFilter">
+
+                                                              <td>{{role.libelle}}</td>
+                                                              <td><tr *ngFor="let r of role.modules">{{r.typeModule}}</tr></td>
+                                                              <td>
+                                          
+                                                                      <button type="button" rel="tooltip" title="Mise A jour d'un role" class="btn btn-primary btn-simple btn-xs" (click)="getRole(role.id)" data-target="#editModal" data-toggle="modal">
+                                                                         <i class="material-icons">create</i>
+                                                                      </button>
+                                                                      <button type="button" rel="tooltip" title="Suppression d'un role" (click)=" getRole(role.id)" class="btn btn-danger btn-simple btn-xs" data-target="#deleteModal" data-toggle="modal">
+                                                                         <i class="material-icons">delete_forever</i>
+                                                                      </button>
+                                                              </td>
+                                          
+    
+                                                       <div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+                                                             <div class="modal-dialog" role="document">
+                                                                  <!--Content-->
+                                                                  <div class="modal-content">
+                                                                       <!--Header--> <div class="col-lg-3 col-md-6 col-sm-6">
+
+                                                <div class="card-header" data-background-color="red">
+                                                    <i class="material-icons" style="color: white;margin-left: 10px;">create</i>
+                                                </div></div>
+                                                                        <div class="modal-header">
+                                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                      <span aria-hidden="true">×</span>
+                                                                              </button>
+                                                                              <h4 class="modal-title w-100" id="deleteModalLabel" style="text-align: center;
+                                                                               color: #3b678e;">Confirmation de suppression</h4>
+                                                                        </div>
+                                                                        <!--Body-->
+                                                                        <div class="modal-body">
+                                                                          <br>
+                                                                        <div>Voulez-vous supprimer ce Role?</div>
+                                                                        </div>
+                  
+                                                                 <div class="modal-footer" >
+                                                                      <div class="form-group text-center">
+                                                                            <div class="form-group row">
+                                                                                  <button class="btn btn-primary btn-round waves-effect waves-light"  (click)="deleteRole(rolee.id)" data-target="#ppModel" data-toggle="modal" data-dismiss="modal">Confirmer</button>
+                                                                                  <button class="btn btn-danger btn-round waves-effect waves-light "   data-dismiss="modal">close</button>
+                                                   
+
+                                                                        </div></div>
+                                                                  </div>
+                  
+                        
+                        
+                       
+
+               
+            
+
+                                                                  </div>
+                                                                  <!--/.Content-->
+                                                        </div> </div>
+
+
+ <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+                                                             <div class="modal-dialog" role="document">
+                                                                  <!--Content-->
+                                                                  <div class="modal-content">
+                                                                       <!--Header-->
+                                                                       <div class="col-lg-3 col-md-6 col-sm-6">
+
+                                                <div class="card-header" data-background-color="red">
+                                                    <i class="material-icons" style="color: white;margin-left: 10px;">create</i>
+                                                </div></div>
+                                                                        <div class="modal-header">
+                                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                      <span aria-hidden="true">×</span>
+                                                                              </button>
+                                                                              <h4 class="modal-title w-100" id="editModalLabel" style="text-align: center;
+                                                                               color: #3b678e;">Modification d'un role</h4>
+                                                                        </div>
+                                                                        <!--Body-->
+                                                                        <div class="modal-body">
+                                                                            <div *ngIf="t==false" class="alert alert-danger" style="text-align: center">{{roleExistError}} <br></div>
+                                                                         <form #formCtrl="ngForm" name="form" (ngSubmit)="f.form.valid && updateUser();" #f="ngForm" novalidate >
+                                                <div class="form-group label-floating is-empty">
+                                                    <label >libelle :</label><input ngControl="libelleCtrl" class="form-control"name="libelle" [(ngModel)]="rolee.libelle" #name="ngModel" required>
+                                                                        </div>
+                                                                        
+                                                                        <div *ngFor="let p2 of modules">
+  <input type="checkbox" (change)="ajoutPackToClient(p2,$event.target.checked)" [checked]="rolee.modules==p2.typeModule" > {{p2.typeModule}}<br>
+</div>
+                                                                      
+                                                                        
+                                                                        </form></div>
+                  
+                                                                 <div class="modal-footer" >
+                                                                      <div class="form-group text-center">
+                                                                            <div class="form-group row">
+                                                                                  <button class="btn btn-primary btn-round waves-effect waves-light"  (click)="updateRole()" data-target="#ppModel" data-toggle="modal" data-dismiss="modal">Confirmer</button>
+                                                                                  <button class="btn btn-danger btn-round waves-effect waves-light "   data-dismiss="modal">close</button>
+                                                   
+
+                                                                        </div></div>
+                                                                  </div>
+                  
+                        
+                        
+                       
+
+               
+            
+
+                                                                  </div>
+                                                                  <!--/.Content-->
+                                                        </div> </div>
+
+
+        
+
+
+        
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination" >
+                                <li  style="cursor: pointer" *ngFor="let p of pages ; let i = index" > 
+                                   <a (click)="goToPage(i)" > {{i}} </a> 
+                                </li> 
+                            </ul>  
+                                                
+                                               
+                                   
+                                </div>
+                                <div class="tab-pane" id="messages">
+                                    <h4 class="modal-title w-100"  style="text-align: center;
+                                                                               color: #3b678e;margin-top: -50px;">Ajout d'un nouveau role</h4>
+                                     <div *ngIf="t==false" class="alert alert-danger" style="text-align: center;    margin-top: 20px;">{{roleExistError}} <br></div>
+
+                                    <form #formCtrl="ngForm" name="form" (ngSubmit)="f.form.valid && ajouterRole()"  #f="ngForm" novalidate >
+                                                <div class="form-group label-floating is-empty">
+                                                    <div class="form-group row"  [ngClass]="{ 'has-error': f.submitted  }">
+
+                                                        <div class="row">
+                                                           
+
+                                                                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+                                                            <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                   
+                                                        <label class="control-label">Libellé:</label>
+                                                                        <input ngControl="libelleCtrl" pattern="^[a-zA-Z ]+$" maxlength="50" class="form-control" name="libelle" [(ngModel)]="Role.libelle" #libelle="ngModel" required  />
+                                                                <div class="md-errors-spacer" [hidden]="libelle.valid || libelle.untouched">
+        <div class="md-char-counter" *ngIf="libelle.errors && libelle.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+        <div class="md-char-counter" *ngIf="libelle.errors && libelle.errors.pattern">
+             <font color="red"> ce champs n'accepte que des lettres et des espaces (50 caractères max)</font>   
+        </div>
+
+        <div class="md-char-counter" *ngIf="libelle.errors && libelle.errors.maxlength">
+             <font color="red"> la longueur ne doit pas dépasser 50 caractères</font>   
+        </div>
+
+        
+        
+        </div>
+                                                                    </div></div></div>
+                                                            
+
+                                                    
+                                                                 <div class="col-md-3" style="margin-top: -30px;margin-left: 150px;" >
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                    
+                                                       
+
+                                                                   
+                                                                
+                                                                <div *ngFor="let p2 of modules">
+  <input ngControl="moduleCtrl" name="module" type="checkbox" (change)="ajoutPackToClient(p2,$event.target.checked)"  required> {{p2.typeModule}}<br>
+  
+</div>
+
+                                                                </div></div>
+                                                           
+                                                                
+                                                                            
+                                                                   
+
+                                                                      
+
+                                                                          
+                                                                       
+
+                                                                                    
+                                                                                        
+                                                                                        </div>
+
+                                                           
+                                                         
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                    
+                                       
+                                          <br/>  <br/>
+
+                                         <div class="form-group text-center" style="margin-top: -30px;">
+                                                   
+                                                    <button id="sinda" class="btn btn-primary btn-round waves-effect waves-light " (click)="ajouterRole()"  [disabled]="!formCtrl.form.valid"  >
+                                                       
+                                                        submit
+                                                  
+                                                    </button>
+                                                    
+                            
+                        
+                                                    <button class="btn btn-danger btn-round waves-effect waves-light "    > Close</button>
+                                                       
+                                         </div>
+                                    
+                                     
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div></div>

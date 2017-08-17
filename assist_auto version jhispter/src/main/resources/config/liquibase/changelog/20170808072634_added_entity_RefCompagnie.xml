@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="current_timestamp" dbms="postgresql"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity RefCompagnie.
+    -->
+    <changeSet id="20170808072634-1" author="jhipster">
+        <createTable tableName="ref_compagnie">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="numero" type="bigint">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="nom" type="varchar(60)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="is_bloque" type="boolean">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="adresse" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="latitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="longitude" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="ville_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+        <createTable tableName="ref_compagnie_pack">
+            <column name="packs_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ref_compagnies_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="ref_compagnies_id, packs_id" tableName="ref_compagnie_pack"/>
+        
+    </changeSet>
+</databaseChangeLog>

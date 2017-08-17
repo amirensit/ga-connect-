@@ -1,0 +1,359 @@
+<div class="main-content">
+     
+<div class="row">
+                <div class=" col-md-12">
+                    <div class="card card-nav-tabs" >
+                        <div class="card-header" data-background-color="orange" style="margin-right:1100px">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="active">
+                                            <a href="#profile" data-toggle="tab">
+                                                <i class="material-icons">list</i>
+                                                Liste des utilisateurs
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#messages" data-toggle="tab">
+                                                <i class="material-icons">add_box</i>
+                                                Nouveau utilisateur
+                                            <div class="ripple-container"></div></a>
+                                        </li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="profile">
+                                  
+                                          <table class="table table-hover" id="profile" [mfData]="pageUtilisateurs" #mf="mfDataTable">
+                                <thead class="text-danger">
+
+                                      
+                                        <tr><td ><i class="material-icons">search</i><input style="margin-top: -70px;margin-left: 20px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.email" placeholder="   chercher par email"></td>
+                                   
+                                            <td> <i class="material-icons">search</i><input style="margin-top: -70px;    margin-left: 18px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.nom" placeholder="chercher par nom"></td>
+                                            <td> <i class="material-icons">search</i><input style="margin-top: -70px;    margin-left: 20px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.prenom" placeholder="chercher par prenom"></td>
+                                              <td></td>
+                                              <td ><i class="material-icons">search</i><input style="margin-top: -70px;    margin-left: 20px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.status" placeholder="chercher par statut"></td>
+                                               <td><i class="material-icons">search</i><input style="margin-top: -70px;    margin-left: 20px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.blocage" placeholder="chercher par blocage"></td>
+                                               <td><i class="material-icons">search</i><input style="margin-top: -70px;    margin-left: 20px;" class="form-control" type="text" [(ngModel)]="utilisateurFilter.connect" placeholder="chercher par connexion"></td>
+                                        </tr>
+                                    <tr>
+                                        <th><mfDefaultSorter by="email">Email</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="nom">Nom</mfDefaultSorter></th>
+                                        <th><mfDefaultSorter by="prenom">Prénom</mfDefaultSorter></th>
+                                         <th>Roles</th>
+                                         <th><mfDefaultSorter by="status">Actif/inactif</mfDefaultSorter></th>
+                                         <th><mfDefaultSorter by="blocage">Bloqué/non bloqué</mfDefaultSorter></th>
+                                         <th><mfDefaultSorter by="connect">Connecté/non connecté</mfDefaultSorter></th>
+                                       
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr  *ngFor="let utilisateur of mf.data | filterBy: utilisateurFilter">
+
+                                         <td>{{utilisateur.email}}</td>
+                                         <td>{{utilisateur.nom}}</td>
+                                         <td>{{utilisateur.prenom}}</td>
+                                         <td><tr *ngFor="let r of utilisateur.roles">{{r.libelle}}</tr></td>
+                                         <td *ngIf="utilisateur.status" >Actif</td>
+                                         <td *ngIf="!utilisateur.status">  Non actif  </td>
+                                         <td *ngIf="!utilisateur.blocage" >Bloqué</td>
+                                         <td *ngIf="utilisateur.blocage">  Non bloqué  </td>
+                                         <td *ngIf="utilisateur.connect" >Connecté</td>
+                                         <td *ngIf="!utilisateur.connect">  Non connecté  </td>
+                                         
+                                         
+                                         <td>
+                                          
+                                                    <button type="button" rel="tooltip" title="Mise A jour" (click)="getUtilisateur(utilisateur.id)"  class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                                        <i class="material-icons">create</i>
+                                                    </button>
+                                                    <button> <div  id="toggle-button">
+                                   <div class="togglebutton">
+                                        <label>
+                                            <input type="checkbox" id="checkme-{{utilisateur.id}}" [checked]=utilisateur.blocage (change)="bloquerUtilisateur(utilisateur.id);">
+                                        </label>
+                                    </div>
+                                </div></button>
+                                                   
+                                         </td>
+     
+      <div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" style="display: none;margin-top: 50px;" aria-hidden="true">
+                                                             <div class="modal-dialog" role="document">
+                                                                  <!--Content-->
+                                                                  <div class="modal-content">
+                                                                       <!--Header-->
+                                                                        <div class="col-lg-3 col-md-6 col-sm-6">
+
+                                                <div class="card-header" data-background-color="red">
+                                                    <i class="material-icons" style="color: white;margin-left: 10px;">create</i>
+                                                </div></div>
+                                                                        <div class="modal-header">
+                                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                      <span aria-hidden="true">×</span>
+                                                                              </button>
+                                                                              <h4 class="modal-title w-100" id="editModalLabel" style="text-align: center;
+                                                                               color: #3b678e;">Modification d'un utilisateur</h4>
+                                                                        </div>
+                                                                        <!--Body-->
+                                                                        <div class="modal-body">
+                                                                            
+                                                                         <form #formCtrl="ngForm" name="form" (ngSubmit)="f.form.valid && updateUser();" #f="ngForm" novalidate >
+                                                                               <div class="col-md-6">
+                                                                              <div class="form-group label-floating is-empty">
+                                                    <label >Email :</label><input ngControl="emailCtrl" class="form-control"name="email" [(ngModel)]="utilisateuur.email" #name="ngModel" required>
+                                                                        </div></div>
+                                                                         <div class="col-md-6">
+                                                <div class="form-group label-floating is-empty">
+                                                    <label >Nom :</label><input ngControl="nomCtrl" class="form-control"name="nom" [(ngModel)]="utilisateuur.nom" #name="ngModel" required>
+                                                                        </div></div>
+                                                                         <div class="col-md-6">
+                                                                         <div class="form-group label-floating is-empty">
+                                                    <label >Prenom :</label><input ngControl="prenomCtrl" class="form-control"name="prenom" [(ngModel)]="utilisateuur.prenom" #name="ngModel" required>
+                                                                        </div></div>
+                                                                         <div class="col-md-6">
+                                                                         <div class="form-group label-floating is-empty">
+                                                    <label >Num fixe :</label><input ngControl="numFixe" class="form-control"name="numFixe" [(ngModel)]="utilisateuur.numFixe" #name="ngModel" required>
+                                                                        </div></div>
+                                                                         <div class="col-md-6">
+                                                                         <div class="form-group label-floating is-empty">
+                                                    <label >Num mobile :</label><input ngControl="numMobileCtrl" class="form-control"name="numMobile" [(ngModel)]="utilisateuur.numMobile" #name="ngModel" required>
+                                                                        </div></div>
+                                                                         <div class="col-md-6">
+                                                                         <div class="form-group label-floating is-empty">
+                                                    <label >Mot de passe :</label><input ngControl="motDePasseCtrl" class="form-control"name="motDePasse" [(ngModel)]="utilisateuur.motDePasse" #name="ngModel" required>
+                                                                        </div></div>
+                                                                        
+                                                                        <div *ngFor="let p2 of roles">
+  <input type="checkbox" (change)="ajoutPackToClient(p2,$event.target.checked)" [checked]="utilisateuur.roles==p2" > {{p2.libelle}}<br>
+</div>
+                                                                      
+                                                                        
+                                                                        </form></div>
+                  
+                                                                 <div class="modal-footer" >
+                                                                      <div class="form-group text-center">
+                                                                            <div class="form-group row">
+                                                                                  <button class="btn btn-primary btn-round waves-effect waves-light"  (click)="updateUtilisateur()" data-target="#ppModel" data-toggle="modal" data-dismiss="modal">Confirmer</button>
+                                                                                  <button class="btn btn-danger btn-round waves-effect waves-light "   data-dismiss="modal">close</button>
+                                                   
+
+                                                                        </div></div>
+                                                                  </div>
+                  
+                        
+                        
+                       
+
+               
+            
+
+                                                                  </div>
+                                                                  <!--/.Content-->
+                                                        </div> </div>
+
+      
+                                                            
+                                                                
+                                                           
+                                                                
+                                                                            
+                                                                   
+
+                                                                      
+
+                                                                          
+
+
+        
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <ul class="pagination" >
+                                <li  style="cursor: pointer" *ngFor="let p of pages ; let i = index" > 
+                                   <a (click)="goToPage(i)" > {{i}} </a> 
+                                </li> 
+                            </ul>
+                                                
+                                               
+                                   
+                                </div>
+                                <div class="tab-pane" id="messages">
+                                    <h4 class="modal-title w-100"  style="text-align: center;
+                                                                               color: #3b678e;margin-top: -50px;">Ajout d'un nouveau role</h4>
+                                     <div *ngIf="t==false" class="alert alert-danger" style="text-align: center;margin-top: 20px;">{{utilisateurExistError}} <br></div>
+
+                                    <form #formCtrl="ngForm" name="form" (ngSubmit)="f.form.valid "  #f="ngForm" novalidate >
+                                                <div class="form-group label-floating is-empty">
+                                                    <div class="form-group row"  [ngClass]="{ 'has-error': f.submitted&& !name.valid   }">
+
+                                                        <div class="row">
+                                                           
+
+                                                                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !name.valid }">
+                                                                      <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                   
+                                                        <label class="control-label">Email:</label>
+                                                                        <input ngControl="emailCtrl" type="email" class="form-control" name="email" [(ngModel)]="Utilisateur.email" #email="ngModel" required  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                                                                <div class="md-errors-spacer" [hidden]="email.valid || email.untouched">
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.pattern">
+          <font color="red"> Email non valide</font>   
+        </div>
+    </div>
+                                                               
+                                                                </div></div>
+                                                            <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                   
+                                                        <label class="control-label">Nom:</label>
+                                                                        <input  pattern="^[a-zA-Z ]+$"  maxlength="50" ngControl="nomCtrl" class="form-control" name="nom" [(ngModel)]="Utilisateur.nom" #nom="ngModel" required  />
+                                                                <div class="md-errors-spacer" [hidden]="nom.valid || nom.untouched">
+        <div class="md-char-counter" *ngIf="nom.errors && nom.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+         <div class="md-char-counter" *ngIf="nom.errors && nom.errors.pattern">
+             <font color="red"> ce champs n'accepte que des lettres et des espaces (50 caractères max)!</font>   
+        </div>
+        <div class="md-char-counter" *ngIf="nom.errors && nom.errors.maxlength">
+             <font color="red"> la longueur ne doit pas dépasser 50 caractères!</font>   
+        </div>
+        </div>
+                                                                </div></div>
+                                                        <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                         <label class="control-label">Prénom:</label>
+                                                                        <input ngControl="prenomCtrl" pattern="^[a-zA-Z ]+$"  maxlength="50" class="form-control" name="prenom" [(ngModel)]="Utilisateur.prenom" #prenom="ngModel" required  />
+                                                               <div class="md-errors-spacer" [hidden]="prenom.valid || prenom.untouched">
+        <div class="md-char-counter" *ngIf="prenom.errors && prenom.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+        
+        <div class="md-char-counter" *ngIf="prenom.errors && prenom.errors.pattern">
+             <font color="red"> ce champs n'accepte que des lettres et des espaces (50 caractères max)!</font>   
+        </div>
+        <div class="md-char-counter" *ngIf="prenom.errors && prenom.errors.maxlength">
+             <font color="red"> la longueur ne doit pas dépasser 50 caractères!</font>   
+        </div>
+        </div>
+                                                                    </div></div>
+                                                                    
+                                                                    <div class="col-md-6">
+                                                                                       
+                                                                           <div class="form-group form-purple label-floating is-empty">
+                                                                                        <label class="control-label">Password:</label>
+                                                                                        <input pPassword ngControl="passwordCtrl" class="form-control" type="password" name="password" [(ngModel)]="nouveaupass"   #password="ngModel" required  >
+                                                                                        <div class="md-errors-spacer" [hidden]="password.valid || password.untouched">
+        <div class="md-char-counter" *ngIf="password.errors && password.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div></div>
+                                                                                        </div></div>
+
+                                                                                        <div class="col-md-6">
+                                                                                       
+                                                                           <div class="form-group form-purple label-floating is-empty">
+                                                                                        <label class="control-label">Confirm password:</label>
+                                                                                        <input pPassword ngControl="passwordCtrl" class="form-control" type="password" name="password" [(ngModel)]="nouveaupass1"   #password="ngModel" required  >
+                                                                                         <div class="md-errors-spacer" [hidden]="password.valid || password.untouched">
+        <div class="md-char-counter" *ngIf="password.errors && password.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div></div>
+                                                                                        </div></div>
+                                                                    
+                                                                    
+                                                                    <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                   
+                                                        <label class="control-label">Num fixe:</label>
+                                                                        <input ngControl="numFixeCtrl" type="tel" class="form-control" name="numFixe" pattern="[7|3][0-9]{7}" [(ngModel)]="Utilisateur.numFixe" #numFixe="ngModel"   />
+                                                               
+                                                               <div class="md-errors-spacer" [hidden]="numFixe.valid ">
+        <div class="md-char-counter" *ngIf="numFixe.errors && numFixe.errors.pattern">
+             <font color="red"> Le num fixe doit commenncer par 7 ou 3 et doit contenir 8 chiffres!</font>   
+        </div></div>
+                                                                </div></div>
+                                                                <div class="col-md-3" style="margin-top: -20px;">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                   
+                                                        <label class="control-label">Num mobile:</label>
+                                                                        <input ngControl="numMobileCtrl" class="form-control" name="numMobile" pattern="[5|2|9][0-9]{7}" [(ngModel)]="Utilisateur.numMobile" #numMobile="ngModel"   />
+                                                               <div class="md-errors-spacer" [hidden]="numMobile.valid ">
+        <div class="md-char-counter" *ngIf="numMobile.errors && numMobile.errors.pattern">
+             <font color="red"> Le num mobile doit commenncer par 5,2 ou 9 et doit contenir 8 chiffres!</font>   
+        </div></div>
+                                                               
+                                                                </div></div>
+                                                                    
+                                                                    </div>
+                                                            
+
+                                                    
+                                                                 <div class="col-md-3">
+                                                                <div class="form-group form-purple label-floating is-empty">
+                                                                    
+                                                       
+
+                                                                   
+                                                                
+                                                                <div *ngFor="let p2 of roles">
+  <label class="answer"><input type="checkbox" (change)="ajoutPackToClient(p2,$event.target.checked)"  required> {{p2.libelle}}<br></label>
+</div>
+                                                                </div></div>
+                                                           
+                                                                
+                                                                            
+                                                                   
+
+                                                                      
+
+                                                                          
+                                                                       
+
+                                                                                    
+                                                                                        
+                                                                                        </div>
+
+                                                           
+                                                         
+                                                        
+
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                    
+                                       
+                                          <br/>  <br/>
+
+                                         <div class="form-group text-center" style="margin-top: -30px;">
+                                                   
+                                                    <button id="sinda" class="btn btn-primary btn-round waves-effect waves-light " (click)="ajouterUtilisateur()"  [disabled]="!formCtrl.form.valid"  >
+                                                       
+                                                        submit
+                                                  
+                                                    </button>
+                                                    
+                            
+                        
+                                                    <button class="btn btn-danger btn-round waves-effect waves-light "    > Close</button>
+                                                       
+                                         </div>
+                                    
+                                     
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div></div>

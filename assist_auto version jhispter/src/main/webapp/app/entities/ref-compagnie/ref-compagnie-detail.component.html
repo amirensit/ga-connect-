@@ -1,0 +1,57 @@
+
+<div *ngIf="refCompagnie">
+    <h2><span jhiTranslate="assistanceApp.refCompagnie.detail.title">Ref Compagnie</span> {{refCompagnie.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.numero">Numero</span></dt>
+        <dd>
+            <span>{{refCompagnie.numero}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.nom">Nom</span></dt>
+        <dd>
+            <span>{{refCompagnie.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.isBloque">Is Bloque</span></dt>
+        <dd>
+            <span>{{refCompagnie.isBloque}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.adresse">Adresse</span></dt>
+        <dd>
+            <span>{{refCompagnie.adresse}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{refCompagnie.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{refCompagnie.longitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.ville">Ville</span></dt>
+        <dd>
+            <div *ngIf="refCompagnie.ville">
+                <a [routerLink]="['/sys-ville', refCompagnie.ville?.id]">{{refCompagnie.ville?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refCompagnie.pack">Pack</span></dt>
+        <dd>
+            <span *ngFor="let pack of refCompagnie.packs; let last = last">
+                <a [routerLink]="['/ref-pack', pack?.id ]">{{pack.nom}}</a>{{last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'ref-compagnie/'+ refCompagnie.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

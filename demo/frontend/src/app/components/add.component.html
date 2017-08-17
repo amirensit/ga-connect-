@@ -1,0 +1,62 @@
+
+<!--Form with header-->
+<div class="card" style="margin-top: 10%;margin-left: 10%;margin-right: 10%">
+    <div class="card-block">
+
+        <!--Header-->
+        <div class="form-header  purple darken-4">
+            <h3> Add product:</h3>
+        </div>
+
+        <!--Body-->
+       <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)" >
+
+        <div class="md-form">
+            
+            <input type="text" id="form4"  class="form-control"  name="des" [(ngModel)]="des" >
+            <label for="form4">designation!!!!!</label>
+            
+            
+        </div>
+
+         <div class="md-form">
+            
+            <input type="number" id="form4"  class="form-control" name="prix" [(ngModel)]="prix" >
+            <label for="form4">prix</label>
+        </div>
+
+         <div class="md-form">
+            
+            <input type="number" id="form4"   class="form-control" #quantiteref="ngModel" name="quantite" [(ngModel)]="quantite" >
+            <label for="form4">quantité</label>
+
+            <div [hidden]="quantiteref.valid"  class="alert alert danger"  > </div>
+        </div>
+
+        
+
+
+        <div class="text-center">
+            <button class="btn btn-deep-purple"  (click)="addProduct()" >ADD</button>
+        </div>
+
+        <div *ngIf="ok">
+            ajout avec succés
+            
+        </div>
+
+        <div *ngIf="no">
+            erreur d'ajout
+            
+        </div>
+
+       </form>
+    </div>
+
+    
+
+
+    </div>
+<!--/Form with header-->
+
+

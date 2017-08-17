@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "voiture",
+            "otherEntityName": "voiture",
+            "otherEntityField": "immatriculation",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "contrat"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "assure",
+            "otherEntityName": "assuree",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pack",
+            "otherEntityName": "refPack",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "compagnie",
+            "otherEntityName": "refCompagnie",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numero",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "debut",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fin",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170808072640",
+    "entityTableName": "contrat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

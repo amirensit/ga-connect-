@@ -1,0 +1,332 @@
+
+
+
+
+<div class="main-content">
+  <a class="red-text"  >
+    
+                                                        
+</a>
+
+    <div class="col-md-12">
+        <div class="card card-nav-tabs" >
+            <div class="card-header" data-background-color="orange" >
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Clients:</span>
+                         <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#profile" (click)="afficherPartieListe()" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Liste des clients
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#ajout" (click)="afficherPartieAjoutClient()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Ajout d'un client
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="card-content">
+            <div *ngIf="partieAffiche" id="profile" class="card-content table-responsive">
+                <table class="table table-hover">
+                    <tr>
+                            
+                                <td> <i class="material-icons" >search</i> <input [(ngModel)]="filtre.num_client" class="form-control" placeholder="chercher  nom pack" style="margin-top: -70px;    margin-left: 18px;" type="number"  >  </td>
+                                <td> <i class="material-icons" >search</i>  <input [(ngModel)]="filtre.nom_client" type="text" class="form-control"  style="margin-top: -70px;    margin-left: 18px;"  >  </td>
+                                <td> <i class="material-icons" >search</i>  <input class="form-control" style="margin-top: -70px;    margin-left: 18px;" > </td>
+                                <td> <i class="material-icons" >search</i>  <input [(ngModel)]="filtre.etat" type="text" class="form-control" style="margin-top: -70px;    margin-left: 18px;"  >   </td>
+                                <td></td>
+                                <td> </td>
+                            
+                        </tr>
+                <thead class="text-danger">
+                        <tr>
+                           
+                            <td>num_client </td>
+                            <td>nom_client </td>
+                            <td>etat </td>
+                            <td>Edit </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let clients of clients |filterBy: filtre">
+
+                               
+                                <td>{{clients.num_client}}</td>
+                                <td>{{clients.nom_client}}</td>
+                                <td *ngIf="clients.etat" >active</td>
+                                <td *ngIf="!clients.etat">  bloqué </td>
+                                
+                                <td>
+                                    
+                                
+                                        <button type="button" rel="tooltip" title="Mise A jour" (click)="editClient(clients.id_client)" class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                            <i class="material-icons">create</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Suppression " (click)="recupererIdClient(clients.id_client)"  class="btn btn-danger btn-simple btn-xs" data-target="#deleteModal" data-toggle="modal">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                
+                    
+
+
+            </div>
+
+            <!--  -->
+<div *ngIf="partieAjout" class="tab-pane"  id="ajout">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-content">
+                    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">num_client</label>
+                                    <input required (change)="verifierClientParNum()" type="number" class="form-control" name="num_clientForAjout" [(ngModel)]="num_clientForAjout" >
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="verifierNumClient == 'existe' "  > oops, ce numéro est déja utilisé par un autre client</p>
+                                    
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">nom_client</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field1="ngModel" [rangeLength]="[1,60 ]"  class="form-control" name="nom_clientForAjout" [(ngModel)]="nom_clientForAjout" >
+                                    <p *ngIf="field1.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (60 caractères max)</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field1.errors?.rangeLength">la longueur ne doit pas dépasser 60 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+
+                        
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label  class="control-label">Pack</label>
+                                   <br> <br>
+
+                                    <table class="table">
+                                        <thead class="text-danger">
+                                            <tr>
+                                                <th>Check-box</th>
+                                                <th>nom_pack</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let p2 of pAjout" >
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input   type="checkbox" (change)="ajoutPackToClient(p2,$event.target.checked)">
+                                                            
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>{{p2.nom_pack}}</td>
+                                                
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+                            </div>
+                           
+                            
+                        </div>
+
+                        
+
+                        <button type="submit" id="myWish"  [disabled]="!addForm.form.valid || verifierNumClient == 'existe'" (click)="ajouterClient()"    class="btn btn-primary btn-round waves-effect waves-light "     >Ajouter client</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+</div>
+            <!--  -->
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                        color: #3b678e;">Suppression d'un produit</h4>
+                </div>
+                <!--Body-->
+                <form  >
+                    <div class="modal-body">
+                        <br>
+                    
+                        voulez vous vraiment supprimer ce client ?
+        recupererIdClient
+                                
+
+                                            
+                        <div class="form-group row">
+                            <button class="btn waves-effect waves-light" style="background-color: #48b3af;margin-left: 350px;color: white;"
+                            (click)="validerSupprimerClient(n)" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                        </div>
+                                
+                    </div>           
+                </form>  
+        
+            </div>
+    </div>
+</div>
+
+
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un client</h4>
+            </div>
+            <!--Body-->
+            <form  >
+                <div class="modal-body">
+                    <br>
+                
+                
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input   type="text" class="form-control" name="nom_client" [(ngModel)]="nom_client"  placeholder="nom_client" />
+                    </div>
+                </div>
+
+
+                     <div class="form-group row">
+                    <div class="checkbox">
+                        <label rel="tooltip" title="bloquer">
+                            <input type="checkbox" [checked]="bloquerOk"  (change)="bloquerClient($event.target.checked)"     >
+                        </label>
+                            <label>   bloquer       </label>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="checkbox">
+                            <label rel="tooltip" title="debloquer">
+                                <input type="checkbox" [checked]="debloquerOk" (change)="debloquerClient($event.target.checked)"     >
+                            </label>
+                            <label>   debloquer       </label>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label  class="control-label">Pack</label>
+                                   <br> <br>
+
+                                    <table class="table">
+                                        <thead class="text-danger">
+                                            <tr>
+                                                <th>Check-box</th>
+                                                <th>nom_pack</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let p2 of pAjout" >
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox"  (change)="ajoutPackToClient(p2,$event.target.checked)"     >
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>{{p2.nom_pack}}</td>
+                                                
+                                            </tr>
+                                            
+                                            
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+                            </div>
+                           
+                            
+                        </div>  
+
+                    <div class="form-group row">
+                        <button class="btn waves-effect waves-light" style="background-color: #48b3af;
+                        margin-left: 350px;
+                        color: white;" (click)="validerEditClient()" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>
+
+
+
+
+

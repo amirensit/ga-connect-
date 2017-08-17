@@ -1,0 +1,30 @@
+{
+    "assistanceApp": {
+        "refCompagnie" : {
+            "home": {
+                "title": "RefCompagnies",
+                "createLabel": "Créer un nouveau Ref Compagnie",
+                "createOrEditLabel": "Créer ou éditer un Ref Compagnie",
+                "search": "Recherche pour Ref Compagnie"
+            },
+            "created": "Un nouveau Ref Compagnie a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ref Compagnie avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ref Compagnie avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ref Compagnie {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ref Compagnie"
+            },
+            "numero": "Numero",
+            "nom": "Nom",
+            "isBloque": "Is Bloque",
+            "adresse": "Adresse",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "ville": "Ville",
+            "contrat": "Contrat",
+            "pack": "Pack"
+        }
+    }
+}

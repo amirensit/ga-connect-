@@ -1,0 +1,23 @@
+{
+    "assistanceApp": {
+        "assuree" : {
+            "home": {
+                "title": "Assurees",
+                "createLabel": "Créer un nouveau Assuree",
+                "createOrEditLabel": "Créer ou éditer un Assuree",
+                "search": "Recherche pour Assuree"
+            },
+            "created": "Un nouveau Assuree a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Assuree avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Assuree avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Assuree {{ id }} ?"
+            },
+            "detail": {
+                "title": "Assuree"
+            },
+            "personne": "Personne",
+            "contrat": "Contrat"
+        }
+    }
+}

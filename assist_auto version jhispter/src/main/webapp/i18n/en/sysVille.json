@@ -1,0 +1,23 @@
+{
+    "assistanceApp": {
+        "sysVille" : {
+            "home": {
+                "title": "Sys Villes",
+                "createLabel": "Create a new Sys Ville",
+                "createOrEditLabel": "Create or edit a Sys Ville",
+                "search": "Search for Sys Ville"
+            },
+            "created": "A new Sys Ville is created with identifier {{ param }}",
+            "updated": "A Sys Ville is updated with identifier {{ param }}",
+            "deleted": "A Sys Ville is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sys Ville {{ id }}?"
+            },
+            "detail": {
+                "title": "Sys Ville"
+            },
+            "nom": "Nom",
+            "gouvernorat": "Gouvernorat"
+        }
+    }
+}

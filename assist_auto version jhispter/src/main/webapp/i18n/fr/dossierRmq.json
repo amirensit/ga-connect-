@@ -1,0 +1,29 @@
+{
+    "assistanceApp": {
+        "dossierRmq" : {
+            "home": {
+                "title": "DossierRmqs",
+                "createLabel": "Créer un nouveau Dossier Rmq",
+                "createOrEditLabel": "Créer ou éditer un Dossier Rmq",
+                "search": "Recherche pour Dossier Rmq"
+            },
+            "created": "Un nouveau Dossier Rmq a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Dossier Rmq avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Dossier Rmq avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Dossier Rmq {{ id }} ?"
+            },
+            "detail": {
+                "title": "Dossier Rmq"
+            },
+            "reference": "Reference",
+            "distance": "Distance",
+            "observation": "Observation",
+            "assuree": "Assuree",
+            "typeService": "Type Service",
+            "lieu": "Lieu",
+            "destination": "Destination",
+            "remorqueur": "Remorqueur"
+        }
+    }
+}

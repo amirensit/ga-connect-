@@ -1,0 +1,32 @@
+{
+    "assistanceApp": {
+        "personne" : {
+            "home": {
+                "title": "Personnes",
+                "createLabel": "Créer un nouveau Personne",
+                "createOrEditLabel": "Créer ou éditer un Personne",
+                "search": "Recherche pour Personne"
+            },
+            "created": "Un nouveau Personne a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Personne avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Personne avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Personne {{ id }} ?"
+            },
+            "detail": {
+                "title": "Personne"
+            },
+            "prenom": "Prenom",
+            "nom": "Nom",
+            "telPrincipal": "Tel Principal",
+            "autreTel": "Autre Tel",
+            "fax": "Fax",
+            "mailPrincipal": "Mail Principal",
+            "autreMail": "Autre Mail",
+            "adresse": "Adresse",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "ville": "Ville"
+        }
+    }
+}

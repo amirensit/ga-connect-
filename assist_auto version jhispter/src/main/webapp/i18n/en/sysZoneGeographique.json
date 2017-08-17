@@ -1,0 +1,23 @@
+{
+    "assistanceApp": {
+        "sysZoneGeographique" : {
+            "home": {
+                "title": "Sys Zone Geographiques",
+                "createLabel": "Create a new Sys Zone Geographique",
+                "createOrEditLabel": "Create or edit a Sys Zone Geographique",
+                "search": "Search for Sys Zone Geographique"
+            },
+            "created": "A new Sys Zone Geographique is created with identifier {{ param }}",
+            "updated": "A Sys Zone Geographique is updated with identifier {{ param }}",
+            "deleted": "A Sys Zone Geographique is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sys Zone Geographique {{ id }}?"
+            },
+            "detail": {
+                "title": "Sys Zone Geographique"
+            },
+            "nom": "Nom",
+            "gouvernorat": "Gouvernorat"
+        }
+    }
+}

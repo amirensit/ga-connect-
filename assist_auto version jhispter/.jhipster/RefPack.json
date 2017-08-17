@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "contrat",
+            "otherEntityName": "contrat",
+            "otherEntityRelationshipName": "pack"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "pack",
+            "relationshipName": "typeService",
+            "otherEntityName": "refTypeService",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "compagnie",
+            "otherEntityName": "refCompagnie",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "pack"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesMaxlength": 60,
+            "fieldValidateRulesPattern": "^[A-Za-z ]+$"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        },
+        {
+            "fieldName": "maxServices",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "max"
+            ],
+            "fieldValidateRulesMax": 90
+        },
+        {
+            "fieldName": "maxKil",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "max"
+            ],
+            "fieldValidateRulesMax": 9999
+        },
+        {
+            "fieldName": "isBloque",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170808072635",
+    "entityTableName": "ref_pack",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

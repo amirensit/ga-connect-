@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Contrat.
+    -->
+    <changeSet id="20170808072640-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="voiture_id"
+                                 baseTableName="contrat"
+                                 constraintName="fk_contrat_voiture_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voiture"/>
+
+        <addForeignKeyConstraint baseColumnNames="assure_id"
+                                 baseTableName="contrat"
+                                 constraintName="fk_contrat_assure_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="assuree"/>
+
+        <addForeignKeyConstraint baseColumnNames="pack_id"
+                                 baseTableName="contrat"
+                                 constraintName="fk_contrat_pack_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ref_pack"/>
+
+        <addForeignKeyConstraint baseColumnNames="compagnie_id"
+                                 baseTableName="contrat"
+                                 constraintName="fk_contrat_compagnie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ref_compagnie"/>
+
+    </changeSet>
+</databaseChangeLog>

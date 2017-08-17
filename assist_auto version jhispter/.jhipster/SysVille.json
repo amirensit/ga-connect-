@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "relationshipName": "gouvernorat",
+            "otherEntityName": "sysGouvernorat",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "changelogDate": "20170808072644",
+    "entityTableName": "sys_ville",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

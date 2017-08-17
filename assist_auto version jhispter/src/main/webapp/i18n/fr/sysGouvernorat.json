@@ -1,0 +1,24 @@
+{
+    "assistanceApp": {
+        "sysGouvernorat" : {
+            "home": {
+                "title": "SysGouvernorats",
+                "createLabel": "Créer un nouveau Sys Gouvernorat",
+                "createOrEditLabel": "Créer ou éditer un Sys Gouvernorat",
+                "search": "Recherche pour Sys Gouvernorat"
+            },
+            "created": "Un nouveau Sys Gouvernorat a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Sys Gouvernorat avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Sys Gouvernorat avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Sys Gouvernorat {{ id }} ?"
+            },
+            "detail": {
+                "title": "Sys Gouvernorat"
+            },
+            "nom": "Nom",
+            "ville": "Ville",
+            "zoneGeographique": "Zone Geographique"
+        }
+    }
+}

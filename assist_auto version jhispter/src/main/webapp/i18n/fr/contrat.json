@@ -1,0 +1,28 @@
+{
+    "assistanceApp": {
+        "contrat" : {
+            "home": {
+                "title": "Contrats",
+                "createLabel": "Créer un nouveau Contrat",
+                "createOrEditLabel": "Créer ou éditer un Contrat",
+                "search": "Recherche pour Contrat"
+            },
+            "created": "Un nouveau Contrat a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Contrat avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Contrat avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Contrat {{ id }} ?"
+            },
+            "detail": {
+                "title": "Contrat"
+            },
+            "numero": "Numero",
+            "debut": "Debut",
+            "fin": "Fin",
+            "voiture": "Voiture",
+            "assure": "Assure",
+            "pack": "Pack",
+            "compagnie": "Compagnie"
+        }
+    }
+}

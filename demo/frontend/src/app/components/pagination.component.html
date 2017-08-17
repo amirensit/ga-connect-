@@ -1,0 +1,43 @@
+<div class="container spacer" >
+
+    
+	 mot clé<input type="text" [(ngModel)]="motCle" >
+     <div style="margin-top: 7%">
+	<button class="btn btn-default"  (click)="getProduits()">charger</button>
+</div>
+<div class="container ">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>	<th>Désignation</th>	<th>prix</th>	<th>Quantité</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let p of pageProduits.content" >
+				<td> {{p.id}}</td>
+				<td> {{p.designation}}</td>
+				<td> {{p.prix}}</td>
+				<td> {{p.quantite}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination">
+   
+    <li class="page-item" *ngFor="let p of pages ; let i = index"  style="cursor: pointer">
+        <a class="page-link" (click)="goToPage(i)" ripple-radius>{{i}}</a>
+    </li>
+    
+  
+  </ul>
+</nav>
+
+</div>

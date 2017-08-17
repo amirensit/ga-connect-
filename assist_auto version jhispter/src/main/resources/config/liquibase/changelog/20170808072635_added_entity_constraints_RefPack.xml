@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity RefPack.
+    -->
+    <changeSet id="20170808072635-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="ref_packs_id"
+                                 baseTableName="ref_pack_type_service"
+                                 constraintName="fk_ref_pack_type_service_ref_packs_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ref_pack"/>
+        <addForeignKeyConstraint baseColumnNames="type_services_id"
+                                 baseTableName="ref_pack_type_service"
+                                 constraintName="fk_ref_pack_type_service_type_services_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="ref_type_service"/>
+        
+    </changeSet>
+</databaseChangeLog>

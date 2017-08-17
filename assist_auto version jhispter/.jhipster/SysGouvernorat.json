@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "ville",
+            "otherEntityName": "sysVille",
+            "otherEntityRelationshipName": "gouvernorat"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "zoneGeographique",
+            "otherEntityName": "sysZoneGeographique",
+            "otherEntityField": "nom"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "changelogDate": "20170808072646",
+    "entityTableName": "sys_gouvernorat",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

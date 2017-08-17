@@ -1,0 +1,30 @@
+{
+    "assistanceApp": {
+        "refCompagnie" : {
+            "home": {
+                "title": "Ref Compagnies",
+                "createLabel": "Create a new Ref Compagnie",
+                "createOrEditLabel": "Create or edit a Ref Compagnie",
+                "search": "Search for Ref Compagnie"
+            },
+            "created": "A new Ref Compagnie is created with identifier {{ param }}",
+            "updated": "A Ref Compagnie is updated with identifier {{ param }}",
+            "deleted": "A Ref Compagnie is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ref Compagnie {{ id }}?"
+            },
+            "detail": {
+                "title": "Ref Compagnie"
+            },
+            "numero": "Numero",
+            "nom": "Nom",
+            "isBloque": "Is Bloque",
+            "adresse": "Adresse",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "ville": "Ville",
+            "contrat": "Contrat",
+            "pack": "Pack"
+        }
+    }
+}

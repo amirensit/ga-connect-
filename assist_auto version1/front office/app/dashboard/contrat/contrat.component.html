@@ -1,0 +1,398 @@
+
+
+
+
+<div class="main-content">
+  <a class="red-text"  >
+    
+                                                        
+</a>
+
+    <div class="col-md-12">
+        <div class="card card-nav-tabs" >
+            <div class="card-header" data-background-color="orange" >
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Contrats:</span>
+                         <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#profile" (click)="afficherPartieListe()" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Liste des contrat
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#ajout" (click)="afficherPartieAjoutContrat()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Ajout d'un contrat
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#import" (click)="afficherPartieImport()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    importer un contrat
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="card-content">
+            <div *ngIf="partieAffiche" id="profile" class="card-content table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-danger">
+                        <tr>
+                           <th>id_contrat </th>
+                            <th>addresse </th>
+                            <th>date début </th>
+                            <th>date fin </th>
+                            <th>nom </th>
+                            <th>num contrat </th>
+                            <th>prenom </th>
+                            
+                            <th>nom marque </th>
+                            <th>nom pack </th>
+                            <th>nom ville </th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let contrats of contrats ">
+
+                               <td>{{contrats.id_contrat}} </td>
+                                <td>{{contrats.addresse}}</td>
+                                <td>{{contrats.date_debut}}</td>
+                                <td>{{contrats.date_fin}}</td>
+                                <td>{{contrats.nom}}</td>
+                                <td>{{contrats.num_contrat}}</td>
+                                <td>{{contrats.prenom}}</td>
+                                <td>{{contrats.marqueDTO.nom_marque}}</td>
+                                <td>{{contrats.packDTO.nom_pack}}</td>
+                                <td>{{contrats.villeDTO.nom_ville}}</td>
+                                <td>
+                                    
+                                
+                                        <button type="button" rel="tooltip" title="Mise A jour" (click)="editContrat(contrats.id_contrat)" class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                            <i class="material-icons">create</i>
+                                        </button>
+                                        
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div *ngIf="partieImport" id="import" class="card-content table-responsive">
+               <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)">
+                <input type="file" name="import" [(ngModel)]="import"> 
+                     <button type="submit" id="myWish"     (click)="importerContrat()"    class="btn btn-primary btn-round waves-effect waves-light ">importer contrat</button>
+               </form>
+
+            </div>
+
+            <!--  -->
+<div *ngIf="partieAjout" class="tab-pane"  id="ajout">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-content">
+                    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >addresse </label>
+                                    <input pattern="^[a-zA-Z0-9',()@ ]*$" #field3="ngModel"  type="text" class="form-control" name="addresseForAjout" [(ngModel)]="addresseForAjout" >
+                                    <p *ngIf="field3.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accèpte pas des caractères spéciaux</p>
+                                    
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                <label> date_debut </label>
+                                    <input type="date"  class="form-control" name="date_debutForAjout" [(ngModel)]="date_debutForAjout" > 
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >date_fin</label>
+                                    <input type="date" (change)="verifierDate()"   class="form-control" name="date_finForAjout" [(ngModel)]="date_finForAjout" >
+                                    <p *ngIf="dateInvalid == true" class="alert alert danger" style="background-color: #ffbb33" >erreur , vérifier la date fin</p>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >nom</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field1="ngModel" [rangeLength]="[1,30 ]"   class="form-control" name="nomForAjout" [(ngModel)]="nomForAjout" >
+                                    <p *ngIf="field1.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (30 caractères max)</p>
+                                     <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field1.errors?.rangeLength">la longueur ne doit pas dépasser 30 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >num_contrat</label>
+                                    <input   class="form-control" name="num_contratForAjout" [(ngModel)]="num_contratForAjout" >
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >prenom</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field2="ngModel" [rangeLength]="[1,30 ]"  class="form-control" name="prenomForAjout" [(ngModel)]="prenomForAjout" >
+                                    <p *ngIf="field2.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (30 caractères max)</p>
+                                     <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field2.errors?.rangeLength">la longueur ne doit pas dépasser 30 caractères</p>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label >gouvernorat</label>
+                                    <select  [(ngModel)]="gForListVille" name="gForListVille"  >
+                                        <option *ngFor="let x of gouvernorats" [ngValue]="x" >{{x.nom_gouvernorat}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="gForListVille" >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label >villes</label>
+                                    <select name="villeForAjout" [(ngModel)]="villeForAjout"  (click)="getVilleByGouvernorat()">
+                                        <option> actualiser</option>
+                                        <option *ngFor="let y of villes" [ngValue]="y"  >{{y.nom_ville}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                         <div class="row"  >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label >packs</label>
+                                    <select name="packForAjout" [(ngModel)]="packForAjout"  >
+                                        
+                                        <option *ngFor="let y of packs" [ngValue]="y"  >{{y.nom_pack}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-primary" *ngIf="packForAjout">
+                            
+                           Le nombre maximum de service de ce pack est  {{packForAjout.nbre_max_service}}<br>
+                            le nbr max de KM est {{packForAjout.kilometrage_max}}
+                        </div>
+                         <div class="row"  >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label >marques</label>
+                                    <select name="marqueForAjout" [(ngModel)]="marqueForAjout"  >
+                                        
+                                        <option *ngFor="let y of marques" [ngValue]="y"  >{{y.nom_marque}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--   -->
+                        
+
+                        
+
+                        <button type="submit" id="myWish"  [disabled]="!addForm.form.valid"   (click)="ajouterContrat()"    class="btn btn-primary btn-round waves-effect waves-light ">Ajouter contrat</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+</div>
+           
+        
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un contrat</h4>
+            </div>
+            <!--Body-->
+            <form  >
+                <div class="modal-body">
+                    <br>
+                
+                
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input   type="text" class="form-control" name="addresse" [(ngModel)]="addresse"  placeholder="addresse" />
+                    </div>
+                </div>
+
+                 <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input type="date"    class="form-control" name="date_debut" [(ngModel)]="date_debut"  placeholder="date_debut" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input type="date"    class="form-control" name="date_fin" [(ngModel)]="date_fin"  placeholder="date_fin" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input   type="text" class="form-control" name="nom" [(ngModel)]="nom"  placeholder="nom" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input   type="text" class="form-control" name="num_contrat" [(ngModel)]="num_contrat"  placeholder="num_contrat" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input   type="text" class="form-control" name="prenom" [(ngModel)]="prenom"  placeholder="prenom" />
+                    </div>
+                </div>
+
+                <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">gouvernorat</label>
+                                    <select  [(ngModel)]="gForListVille" name="gForListVille"  >
+                                        <option *ngFor="let x of gouvernorats" [ngValue]="x" >{{x.nom_gouvernorat}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                </div>
+                        <div class="row" *ngIf="gForListVille" >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">villes</label>
+                                    <select name="villeForEdit" [(ngModel)]="villeForEdit"  (click)="getVilleByGouvernorat()">
+                                        <option> actualiser</option>
+                                        <option *ngFor="let y of villes" [ngValue]="y"  >{{y.nom_ville}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row"  >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">marques</label>
+                                    <select name="marqueForEdit" [(ngModel)]="marqueForEdit"  >
+                                        <option> actualiser</option>
+                                        <option *ngFor="let y of marques" [ngValue]="y"  >{{y.nom_marque}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"  >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label >packs</label>
+                                    <select name="packForEdit" [(ngModel)]="packForEdit"  >
+                                        
+                                        <option *ngFor="let y of packs" [ngValue]="y"  >{{y.nom_pack}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                     
+                   
+
+
+
+
+                      
+
+                    <div class="form-group row">
+                        <button class="btn waves-effect waves-light" style="background-color: #48b3af;
+                        margin-left: 350px;
+                        color: white;" (click)="validerEditContrat()" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>
+
+
+
+
+

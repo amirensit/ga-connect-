@@ -1,0 +1,26 @@
+{
+    "assistanceApp": {
+        "voiture" : {
+            "home": {
+                "title": "Voitures",
+                "createLabel": "Create a new Voiture",
+                "createOrEditLabel": "Create or edit a Voiture",
+                "search": "Search for Voiture"
+            },
+            "created": "A new Voiture is created with identifier {{ param }}",
+            "updated": "A Voiture is updated with identifier {{ param }}",
+            "deleted": "A Voiture is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Voiture {{ id }}?"
+            },
+            "detail": {
+                "title": "Voiture"
+            },
+            "immatriculation": "Immatriculation",
+            "miseCirculation": "Mise Circulation",
+            "puissanceFiscale": "Puissance Fiscale",
+            "marque": "Marque",
+            "contrat": "Contrat"
+        }
+    }
+}

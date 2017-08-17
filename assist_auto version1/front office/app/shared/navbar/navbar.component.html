@@ -1,0 +1,46 @@
+<nav *ngIf="currentUser !== null " class="navbar navbar-transparent navbar-absolute" style="margin-top: -13px;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="color: white;">{{getTitle()}}</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  
+                       
+                        
+                    </a>
+                     <div class="mdl-selectfield">
+                    <select *ngIf="currentUser !== null " class="browser-default">
+                                                                
+                <option *ngFor="let role of currentUser.roles" id="role" name="roleId" >{{role.libelle }}</option></select></div>
+                    
+                </li>
+                
+                <li class="dropdown">
+                    <a href="#pablo" class="dropdown-toggle" data-toggle="dropdown" style="margin-top: 15px;">
+                             <i class="material-icons">person</i>
+                       <i class="nav-item" *ngIf="currentUser !== null ">{{currentUser.prenom}} {{currentUser.nom}}</i>
+                    </a>
+                    
+                       
+                    
+                    <ul class="dropdown-menu">
+                         <li class="nav-item"><a class="nav-link"  > <i class="material-icons">settings</i>Changer mon mot de passe</a></li>
+                        <li class="nav-item"><a class="nav-link" (click)="logout(currentUser.id)" > <i class="material-icons">exit_to_app</i>Logout</a></li>
+                    </ul>
+                </li>
+               
+            </ul>
+
+          
+        </div>
+    </div>
+</nav>

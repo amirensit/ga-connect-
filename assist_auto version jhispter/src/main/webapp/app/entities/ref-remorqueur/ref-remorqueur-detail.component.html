@@ -1,0 +1,59 @@
+
+<div *ngIf="refRemorqueur">
+    <h2><span jhiTranslate="assistanceApp.refRemorqueur.detail.title">Ref Remorqueur</span> {{refRemorqueur.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.raisonSociale">Raison Sociale</span></dt>
+        <dd>
+            <span>{{refRemorqueur.raisonSociale}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.numEtablissement">Num Etablissement</span></dt>
+        <dd>
+            <span>{{refRemorqueur.numEtablissement}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.codeCategorie">Code Categorie</span></dt>
+        <dd>
+            <span>{{refRemorqueur.codeCategorie}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.codeTVA">Code TVA</span></dt>
+        <dd>
+            <span>{{refRemorqueur.codeTVA}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.matriculeFiscal">Matricule Fiscal</span></dt>
+        <dd>
+            <span>{{refRemorqueur.matriculeFiscal}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.adresse">Adresse</span></dt>
+        <dd>
+            <span>{{refRemorqueur.adresse}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{refRemorqueur.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{refRemorqueur.longitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.refRemorqueur.contact">Contact</span></dt>
+        <dd>
+            <div *ngIf="refRemorqueur.contact">
+                <a [routerLink]="['/contact', refRemorqueur.contact?.id]">{{refRemorqueur.contact?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'ref-remorqueur/'+ refRemorqueur.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

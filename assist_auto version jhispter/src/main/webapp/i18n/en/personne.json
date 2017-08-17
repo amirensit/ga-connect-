@@ -1,0 +1,32 @@
+{
+    "assistanceApp": {
+        "personne" : {
+            "home": {
+                "title": "Personnes",
+                "createLabel": "Create a new Personne",
+                "createOrEditLabel": "Create or edit a Personne",
+                "search": "Search for Personne"
+            },
+            "created": "A new Personne is created with identifier {{ param }}",
+            "updated": "A Personne is updated with identifier {{ param }}",
+            "deleted": "A Personne is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Personne {{ id }}?"
+            },
+            "detail": {
+                "title": "Personne"
+            },
+            "prenom": "Prenom",
+            "nom": "Nom",
+            "telPrincipal": "Tel Principal",
+            "autreTel": "Autre Tel",
+            "fax": "Fax",
+            "mailPrincipal": "Mail Principal",
+            "autreMail": "Autre Mail",
+            "adresse": "Adresse",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "ville": "Ville"
+        }
+    }
+}

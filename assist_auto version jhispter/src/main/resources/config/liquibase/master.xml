@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072633_added_entity_DossierRmq.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072634_added_entity_RefCompagnie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072635_added_entity_RefPack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072636_added_entity_RefRemorqueur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072637_added_entity_Personne.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072638_added_entity_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072639_added_entity_Assuree.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072640_added_entity_Contrat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072641_added_entity_Voiture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072642_added_entity_RefMarque.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072643_added_entity_RefTypeService.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072644_added_entity_SysVille.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072645_added_entity_SysZoneGeographique.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072646_added_entity_SysGouvernorat.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20170808072633_added_entity_constraints_DossierRmq.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072634_added_entity_constraints_RefCompagnie.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072635_added_entity_constraints_RefPack.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072636_added_entity_constraints_RefRemorqueur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072637_added_entity_constraints_Personne.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072638_added_entity_constraints_Contact.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072639_added_entity_constraints_Assuree.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072640_added_entity_constraints_Contrat.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072641_added_entity_constraints_Voiture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072644_added_entity_constraints_SysVille.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170808072646_added_entity_constraints_SysGouvernorat.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

@@ -1,0 +1,30 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "personne",
+            "otherEntityName": "personne",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "contact"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "remorqueur",
+            "otherEntityName": "refRemorqueur",
+            "otherEntityRelationshipName": "contact"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "isGerant",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20170808072638",
+    "entityTableName": "contact",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

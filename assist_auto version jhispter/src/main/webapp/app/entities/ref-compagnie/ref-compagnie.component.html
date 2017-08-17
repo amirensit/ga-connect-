@@ -1,0 +1,91 @@
+<div>
+    <h2>
+        <span jhiTranslate="assistanceApp.refCompagnie.home.title">Ref Compagnies</span>
+        <button class="btn btn-primary float-right jh-create-entity create-ref-compagnie" [routerLink]="['/', { outlets: { popup: ['ref-compagnie-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="assistanceApp.refCompagnie.home.createLabel">
+            Create new Ref Compagnie
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'assistanceApp.refCompagnie.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="refCompagnies">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.numero">Numero</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.nom">Nom</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.isBloque">Is Bloque</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.adresse">Adresse</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.latitude">Latitude</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.longitude">Longitude</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.ville">Ville</span></th>
+            <th><span jhiTranslate="assistanceApp.refCompagnie.pack">Pack</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let refCompagnie of refCompagnies ;trackBy: trackId">
+                <td><a [routerLink]="['../ref-compagnie', refCompagnie.id ]">{{refCompagnie.id}}</a></td>
+                <td>{{refCompagnie.numero}}</td>
+                <td>{{refCompagnie.nom}}</td>
+                <td>{{refCompagnie.isBloque}}</td>
+                <td>{{refCompagnie.adresse}}</td>
+                <td>{{refCompagnie.latitude}}</td>
+                <td>{{refCompagnie.longitude}}</td>
+                <td>
+                    <div *ngIf="refCompagnie.ville">
+                        <a [routerLink]="['../sys-ville', refCompagnie.ville?.id ]" >{{refCompagnie.ville?.nom}}</a>
+                    </div>
+                </td>
+                <td>
+                    <span *ngFor="let pack of refCompagnie.packs; let last = last">
+                            <a class="form-control-static" [routerLink]="['../ref-pack', pack?.id ]">{{pack.nom}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../ref-compagnie', refCompagnie.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ref-compagnie/'+ refCompagnie.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ref-compagnie/'+ refCompagnie.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

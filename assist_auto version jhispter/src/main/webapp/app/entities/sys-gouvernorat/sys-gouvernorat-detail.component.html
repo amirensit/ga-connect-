@@ -1,0 +1,31 @@
+
+<div *ngIf="sysGouvernorat">
+    <h2><span jhiTranslate="assistanceApp.sysGouvernorat.detail.title">Sys Gouvernorat</span> {{sysGouvernorat.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.sysGouvernorat.nom">Nom</span></dt>
+        <dd>
+            <span>{{sysGouvernorat.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.sysGouvernorat.zoneGeographique">Zone Geographique</span></dt>
+        <dd>
+            <div *ngIf="sysGouvernorat.zoneGeographique">
+                <a [routerLink]="['/sys-zone-geographique', sysGouvernorat.zoneGeographique?.id]">{{sysGouvernorat.zoneGeographique?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'sys-gouvernorat/'+ sysGouvernorat.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

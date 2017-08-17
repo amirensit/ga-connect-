@@ -1,0 +1,62 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "assuree",
+            "otherEntityName": "assuree",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "dossierRmq"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "typeService",
+            "otherEntityName": "refTypeService",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "dossierRmq"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "lieu",
+            "otherEntityName": "sysVille",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "destination",
+            "otherEntityName": "sysVille",
+            "otherEntityField": "nom"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "remorqueur",
+            "otherEntityName": "refRemorqueur",
+            "otherEntityField": "raisonSociale"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "reference",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "distance",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "observation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 2000
+        }
+    ],
+    "changelogDate": "20170808072633",
+    "entityTableName": "dossier_rmq",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

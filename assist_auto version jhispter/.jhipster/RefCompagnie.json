@@ -1,0 +1,72 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "ville",
+            "otherEntityName": "sysVille",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "refCompagnie"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "contrat",
+            "otherEntityName": "contrat",
+            "otherEntityRelationshipName": "compagnie"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityRelationshipName": "compagnie",
+            "relationshipName": "pack",
+            "otherEntityName": "refPack",
+            "otherEntityField": "nom",
+            "ownerSide": true
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numero",
+            "javadoc": "constraint unique to add later",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength",
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesMaxlength": 60,
+            "fieldValidateRulesPattern": "^[A-Za-z ]+$"
+        },
+        {
+            "fieldName": "isBloque",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "adresse",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "latitude",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "longitude",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170808072634",
+    "entityTableName": "ref_compagnie",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

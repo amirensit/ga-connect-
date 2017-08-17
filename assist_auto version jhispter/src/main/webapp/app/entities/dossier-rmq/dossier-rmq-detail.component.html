@@ -1,0 +1,63 @@
+
+<div *ngIf="dossierRmq">
+    <h2><span jhiTranslate="assistanceApp.dossierRmq.detail.title">Dossier Rmq</span> {{dossierRmq.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.reference">Reference</span></dt>
+        <dd>
+            <span>{{dossierRmq.reference}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.distance">Distance</span></dt>
+        <dd>
+            <span>{{dossierRmq.distance}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.observation">Observation</span></dt>
+        <dd>
+            <span>{{dossierRmq.observation}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.assuree">Assuree</span></dt>
+        <dd>
+            <div *ngIf="dossierRmq.assuree">
+                <a [routerLink]="['/assuree', dossierRmq.assuree?.id]">{{dossierRmq.assuree?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.typeService">Type Service</span></dt>
+        <dd>
+            <div *ngIf="dossierRmq.typeService">
+                <a [routerLink]="['/ref-type-service', dossierRmq.typeService?.id]">{{dossierRmq.typeService?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.lieu">Lieu</span></dt>
+        <dd>
+            <div *ngIf="dossierRmq.lieu">
+                <a [routerLink]="['/sys-ville', dossierRmq.lieu?.id]">{{dossierRmq.lieu?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.destination">Destination</span></dt>
+        <dd>
+            <div *ngIf="dossierRmq.destination">
+                <a [routerLink]="['/sys-ville', dossierRmq.destination?.id]">{{dossierRmq.destination?.nom}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.dossierRmq.remorqueur">Remorqueur</span></dt>
+        <dd>
+            <div *ngIf="dossierRmq.remorqueur">
+                <a [routerLink]="['/ref-remorqueur', dossierRmq.remorqueur?.id]">{{dossierRmq.remorqueur?.raisonSociale}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'dossier-rmq/'+ dossierRmq.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,182 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDossierRmqLabel" jhiTranslate="assistanceApp.dossierRmq.home.createOrEditLabel">Create or edit a Dossier Rmq</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]=true>
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="dossierRmq.id" readonly />
+        </div>
+    <ngb-tabset>
+        <ngb-tab title="Dossier">
+            <ng-template ngbTabContent>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.dossierRmq.reference" for="field_reference">Reference</label>
+                        <input type="text" class="form-control" name="reference" id="field_reference"
+                            [(ngModel)]="dossierRmq.reference"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.dossierRmq.distance" for="field_distance">Distance</label>
+                        <input type="number" class="form-control" name="distance" id="field_distance"
+                            [(ngModel)]="dossierRmq.distance"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.dossierRmq.observation" for="field_observation">Observation</label>
+                        <input type="text" class="form-control" name="observation" id="field_observation"
+                            [(ngModel)]="dossierRmq.observation" maxlength="2000" />
+                        <div [hidden]="!(editForm.controls.observation?.dirty && editForm.controls.observation?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.observation?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 2000 }">
+                            This field cannot be longer than 2000 characters.
+                            </small>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label jhiTranslate="assistanceApp.dossierRmq.lieu" for="field_lieu">Lieu</label>
+                        <select class="form-control" id="field_lieu" name="lieu" [(ngModel)]="dossierRmq.lieu" >
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="sysVilleOption.id === dossierRmq.lieu?.id ? dossierRmq.lieu : sysVilleOption" *ngFor="let sysVilleOption of sysvilles; trackBy: trackSysVilleById">{{sysVilleOption.nom}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label jhiTranslate="assistanceApp.dossierRmq.destination" for="field_destination">Destination</label>
+                        <select class="form-control" id="field_destination" name="destination" [(ngModel)]="dossierRmq.destination" >
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="sysVilleOption.id === dossierRmq.destination?.id ? dossierRmq.destination : sysVilleOption" *ngFor="let sysVilleOption of sysvilles; trackBy: trackSysVilleById">{{sysVilleOption.nom}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label jhiTranslate="assistanceApp.dossierRmq.remorqueur" for="field_remorqueur">Remorqueur</label>
+                        <select class="form-control" id="field_remorqueur" name="remorqueur" [(ngModel)]="dossierRmq.remorqueur" >
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="refRemorqueurOption.id === dossierRmq.remorqueur?.id ? dossierRmq.remorqueur : refRemorqueurOption" *ngFor="let refRemorqueurOption of refremorqueurs; trackBy: trackRefRemorqueurById">{{refRemorqueurOption.raisonSociale}}</option>
+                        </select>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Assuré">
+                <ng-template ngbTabContent>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.prenom" for="field_prenom">Prenom</label>
+                        <input type="text" class="form-control" name="prenom" id="field_prenom"
+                            [(ngModel)]="dossierRmq.assuree.personne.prenom" required />
+                        <div [hidden]="!(editForm.controls.prenom?.dirty && editForm.controls.prenom?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.prenom?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.nom" for="field_nom">Nom</label>
+                        <input type="text" class="form-control" name="nomAssuree" id="field_nom"
+                            [(ngModel)]="dossierRmq.assuree.personne.nom" required />
+                        <div [hidden]="!(editForm.controls.nomAssuree?.dirty && editForm.controls.nomAssuree?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.nomAssuree?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.telPrincipal" for="field_telPrincipal">Tel Principal</label>
+                        <input type="number" class="form-control" name="telPrincipal" id="field_telPrincipal"
+                            [(ngModel)]="dossierRmq.assuree.personne.telPrincipal" required />
+                        <div [hidden]="!(editForm.controls.telPrincipal?.dirty && editForm.controls.telPrincipal?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.telPrincipal?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                                [hidden]="!editForm.controls.telPrincipal?.errors?.number" jhiTranslate="entity.validation.number">
+                                This field should be a number.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.autreTel" for="field_autreTel">Autre Tel</label>
+                        <input type="number" class="form-control" name="autreTel" id="field_autreTel"
+                            [(ngModel)]="dossierRmq.assuree.personne.autreTel"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.fax" for="field_fax">Fax</label>
+                        <input type="number" class="form-control" name="fax" id="field_fax"
+                            [(ngModel)]="dossierRmq.assuree.personne.fax"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.mailPrincipal" for="field_mailPrincipal">Mail Principal</label>
+                        <input type="text" class="form-control" name="mailPrincipal" id="field_mailPrincipal"
+                            [(ngModel)]="dossierRmq.assuree.personne.mailPrincipal"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.autreMail" for="field_autreMail">Autre Mail</label>
+                        <input type="text" class="form-control" name="autreMailAssuree" id="field_autreMail"
+                            [(ngModel)]="dossierRmq.assuree.personne.autreMail"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.adresse" for="field_adresse">Adresse</label>
+                        <input type="text" class="form-control" name="adresseAssuree" id="field_adresse"
+                            [(ngModel)]="dossierRmq.assuree.personne.adresse" required />
+                        <div [hidden]="!(editForm.controls.adresseAssuree?.dirty && editForm.controls.adresseAssure?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.adresseAssuree?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.latitude" for="field_latitude">Latitude</label>
+                        <input type="text" class="form-control" name="latitude" id="field_latitude"
+                            [(ngModel)]="dossierRmq.assuree.personne.latitude"  />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.personne.longitude" for="field_longitude">Longitude</label>
+                        <input type="text" class="form-control" name="longitude" id="field_longitude"
+                            [(ngModel)]="dossierRmq.assuree.personne.longitude"  />
+                    </div>
+
+                    <div class="form-group">
+                        <label jhiTranslate="assistanceApp.personne.ville" for="field_ville">Ville</label>
+                        <select class="form-control" id="field_ville" name="ville" [(ngModel)]="dossierRmq.assuree.personne.ville">
+                            <option [ngValue]="null"></option>
+                            <option [ngValue]="sysVilleOption.id === dossierRmq.assuree.personne.ville?.id ? dossierRmq.assuree.personne.ville : sysVilleOption" *ngFor="let sysVilleOption of sysvilles; trackBy: trackSysVilleById">{{sysVilleOption.nom}}</option>
+                        </select>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Type de Service">
+                <ng-template ngbTabContent>
+                    <div class="form-group">
+                        <label class="form-control-label" jhiTranslate="assistanceApp.refTypeService.nom" for="field_nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" id="field_nom"
+                            [(ngModel)]="dossierRmq.typeService.nom" required maxlength="60" />
+                        <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                            This field is required.
+                            </small>
+                            <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
+                            This field cannot be longer than 60 characters.
+                            </small>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-tab>
+        </ngb-tabset>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

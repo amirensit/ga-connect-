@@ -1,0 +1,39 @@
+
+<div *ngIf="voiture">
+    <h2><span jhiTranslate="assistanceApp.voiture.detail.title">Voiture</span> {{voiture.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.voiture.immatriculation">Immatriculation</span></dt>
+        <dd>
+            <span>{{voiture.immatriculation}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.voiture.miseCirculation">Mise Circulation</span></dt>
+        <dd>
+            <span>{{voiture.miseCirculation | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.voiture.puissanceFiscale">Puissance Fiscale</span></dt>
+        <dd>
+            <span>{{voiture.puissanceFiscale}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.voiture.marque">Marque</span></dt>
+        <dd>
+            <div *ngIf="voiture.marque">
+                <a [routerLink]="['/ref-marque', voiture.marque?.id]">{{voiture.marque?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'voiture/'+ voiture.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

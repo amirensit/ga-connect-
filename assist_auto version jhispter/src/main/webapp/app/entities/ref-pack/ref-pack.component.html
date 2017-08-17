@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span jhiTranslate="assistanceApp.refPack.home.title">Ref Packs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-ref-pack" [routerLink]="['/', { outlets: { popup: ['ref-pack-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down"  jhiTranslate="assistanceApp.refPack.home.createLabel">
+            Create new Ref Pack
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="{{ 'assistanceApp.refPack.home.search' | translate }}">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="refPacks">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.nom">Nom</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.description">Description</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.maxServices">Max Services</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.maxKil">Max Kil</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.isBloque">Is Bloque</span></th>
+            <th><span jhiTranslate="assistanceApp.refPack.typeService">Type Service</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let refPack of refPacks ;trackBy: trackId">
+                <td><a [routerLink]="['../ref-pack', refPack.id ]">{{refPack.id}}</a></td>
+                <td>{{refPack.nom}}</td>
+                <td>{{refPack.description}}</td>
+                <td>{{refPack.maxServices}}</td>
+                <td>{{refPack.maxKil}}</td>
+                <td>{{refPack.isBloque}}</td>
+                <td>
+                    <span *ngFor="let typeService of refPack.typeServices; let last = last">
+                            <a class="form-control-static" [routerLink]="['../ref-type-service', typeService?.id ]">{{typeService.nom}}</a>{{last ? '' : ', '}}
+                        </span>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../ref-pack', refPack.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ref-pack/'+ refPack.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'ref-pack/'+ refPack.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

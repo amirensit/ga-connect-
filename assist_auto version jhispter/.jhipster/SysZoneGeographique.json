@@ -1,0 +1,27 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "gouvernorat",
+            "otherEntityName": "sysGouvernorat",
+            "otherEntityRelationshipName": "zoneGeographique"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "changelogDate": "20170808072645",
+    "entityTableName": "sys_zone_geographique",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

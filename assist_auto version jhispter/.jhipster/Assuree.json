@@ -1,0 +1,25 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "personne",
+            "otherEntityName": "personne",
+            "otherEntityField": "nom",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "assuree"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "contrat",
+            "otherEntityName": "contrat",
+            "otherEntityRelationshipName": "assure"
+        }
+    ],
+    "fields": [],
+    "changelogDate": "20170808072639",
+    "entityTableName": "assuree",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}

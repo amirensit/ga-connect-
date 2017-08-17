@@ -1,0 +1,221 @@
+
+
+
+
+<div class="main-content">
+  <a class="red-text"  ></a>
+  <div class="col-md-12">
+     <div class="card card-nav-tabs" >
+        <div class="card-header" data-background-color="orange" >
+            <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">type de service:</span>
+                         <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#profile" (click)="afficherPartieListe()" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Liste des type de service
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#ajout" (click)="afficherPartieAjoutMarque()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Ajout d'un type de service
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+            </div>
+        </div>
+        <div class="card-content">
+            <div *ngIf="partieAffiche" id="profile" class="card-content table-responsive">
+                <table class="table table-hover">
+                    
+                    <thead class="text-danger">
+
+                       
+                        <tr>
+                            <td> <i class="material-icons" >search</i> <input style="margin-top: -70px;    margin-left: 18px;" class="form-control" placeholder="  cliquer sur filtrer" type="text" [(ngModel)]="filtre.nom_typeService" ></td>
+
+
+                        </tr>
+
+
+                        <tr>
+                            
+                            <th> nom typeService </th>
+                            <th>Edit </th>
+                        </tr>
+                        
+
+                    </thead>
+                    <tbody>
+                       
+                        <tr   *ngFor="let type of typeServices |filterBy: filtre">
+
+                                
+                                <td>{{type.nom_typeService}}</td>
+                                
+                                
+                                <td>
+                                    
+                                
+                                        <button type="button" rel="tooltip" title="Mise A jour" (click)="editTypeService(type.id_typeService)" class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                            <i class="material-icons">create</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Suppression " (click)="recupererIdTypeService(type.id_typeService)"  class="btn btn-danger btn-simple btn-xs" data-target="#deleteModal" data-toggle="modal">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+
+                
+                 
+
+            </div>
+
+            <!--Partie ajout -->
+            <div *ngIf="partieAjout" class="tab-pane"  id="ajout">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                
+                                <div class="card-content">
+                                    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)">
+                                        
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group form-black label-floating is-empty">
+                                                    <label class="control-label">nom_typeService</label>
+                                                    <input #field1="ngModel" required type="text" class="form-control" name="nom_typeServiceForAjout" [(ngModel)]="nom_typeServiceForAjout" >
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-round waves-effect waves-light " [disabled]="!addForm.form.valid" (click)="ajouterTypeService()">Ajouter type de service</button>
+                                        <div class="clearfix"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!-- partie ajout -->
+        </div>
+
+     </div>
+
+
+
+  </div>
+   
+
+    
+</div>
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                        color: #3b678e;">Suppression d'un type de service</h4>
+                </div>
+                <!--Body-->
+                <form  >
+                    <div class="modal-body">
+                        <br>
+                    
+                        voulez vous vraiment supprimer cette type de service ?
+   
+                                
+
+                                            
+                        <div class="form-group row">
+                            <button class="btn waves-effect waves-light" style="background-color: #48b3af;margin-left: 350px;color: white;"
+                            (click)="validerSupprimerTypeService(n)" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                        </div>
+                                
+                    </div>           
+                </form>  
+        
+            </div>
+    </div>
+</div>
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un type de service</h4>
+            </div>
+            <!--Body-->
+            <form  >
+                <div class="modal-body">
+                    <br>
+                
+               
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" name="nom_typeService" [(ngModel)]="nom_typeService"  placeholder="nom_typeService" />
+                    </div>
+                </div>
+
+                 
+
+                    <div class="form-group row">
+                        <button class="btn waves-effect waves-light" style="background-color: #48b3af;
+                        margin-left: 350px;
+                        color: white;" (click)="validerEditTypeService()" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

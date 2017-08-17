@@ -1,0 +1,85 @@
+
+<div class="main-content">
+<div class="col-md-6" style="margin-left:310px;  ">
+ 
+    <br/><br/><br/>
+    <div class="card card-nav-tabs" style=" width: 75%;"  >
+        <div class="card-header" data-background-color="purple">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <div class="navbar-center">
+                    <ul class="nav nav-tabs" data-tabs="tabs" style="margin-left:150px;">
+                        <li class="active" style="margin-right: 5px;">
+                            <a class="text-center"  href="#login" data-toggle="tab" style="margin-left: 40px;">
+                                <i class="material-icons">https</i>
+                                Login
+                                <div class="ripple-container"></div></a>
+                        </li>
+                        
+                    </ul></div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="card-content">
+            <div class="tab-content">
+                <div class="tab-pane active" id="login">
+
+                    <form #formCtrl="ngForm" name="login-form" class="login-form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                        
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+                            
+                            <label for="email">  <i class="fa fa-user mr-1"></i> Email</label>
+                            
+                            <input ngControl="emailCtrl" type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required />
+<div class="md-errors-spacer" [hidden]="h==true">
+<div class="md-char-counter" *ngIf="t==true">
+             <font color="red"> Email incorrect!</font>   
+        </div></div>
+<div class="md-errors-spacer" [hidden]="email.valid || email.untouched">
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+        <div class="md-char-counter" *ngIf="email.errors && email.errors.pattern">
+          <font color="red"> Email non valide</font>   
+        </div>
+         
+    </div>
+                           
+
+                        </div>
+                        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !motDePasse.valid }">
+                            <label for="motDePasse"><i class="fa fa-lock prefix"></i> Mot de passe</label>
+                            <input type="password" class="form-control" name="motDePasse" [(ngModel)]="model.motDePasse" #motDePasse="ngModel" required />
+                            <div class="md-errors-spacer" [hidden]="t==true">
+<div class="md-char-counter" *ngIf="h==true">
+             <font color="red"> Mot de passe incorrecte!</font>   
+        </div></div>
+                            <div class="md-errors-spacer" [hidden]="motDePasse.valid || motDePasse.untouched">
+        <div class="md-char-counter" *ngIf="motDePasse.errors && motDePasse.errors.required">
+             <font color="red"> Vous devez remplir ce champ!</font>   
+        </div>
+       
+         
+    </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group text-center">
+                                <button [disabled]="loading" class="btn btn-primary btn-round waves-effect waves-light" (click)="login()">Login &nbsp;<i class="fa fa-sign-in ml-1"></i></button></div>
+                            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                           
+                        </div>
+                       
+                    </form>
+
+                </div></div></div>
+
+
+
+               
+
+
+
+
+            

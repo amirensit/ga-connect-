@@ -1,0 +1,67 @@
+
+<div *ngIf="personne">
+    <h2><span jhiTranslate="assistanceApp.personne.detail.title">Personne</span> {{personne.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.personne.prenom">Prenom</span></dt>
+        <dd>
+            <span>{{personne.prenom}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.nom">Nom</span></dt>
+        <dd>
+            <span>{{personne.nom}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.telPrincipal">Tel Principal</span></dt>
+        <dd>
+            <span>{{personne.telPrincipal}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.autreTel">Autre Tel</span></dt>
+        <dd>
+            <span>{{personne.autreTel}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.fax">Fax</span></dt>
+        <dd>
+            <span>{{personne.fax}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.mailPrincipal">Mail Principal</span></dt>
+        <dd>
+            <span>{{personne.mailPrincipal}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.autreMail">Autre Mail</span></dt>
+        <dd>
+            <span>{{personne.autreMail}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.adresse">Adresse</span></dt>
+        <dd>
+            <span>{{personne.adresse}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.latitude">Latitude</span></dt>
+        <dd>
+            <span>{{personne.latitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.longitude">Longitude</span></dt>
+        <dd>
+            <span>{{personne.longitude}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.personne.ville">Ville</span></dt>
+        <dd>
+            <div *ngIf="personne.ville">
+                <a [routerLink]="['/sys-ville', personne.ville?.id]">{{personne.ville?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'personne/'+ personne.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

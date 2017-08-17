@@ -1,0 +1,75 @@
+
+
+<div style="margin-top: 20%;margin-left: 20%">
+
+<form>
+    <div class="md-form">
+        <input type="number" id="form1" class="form-control" name="n" [(ngModel)]="n">
+        <label for="form1" class=""   >enter id</label>
+    </div>
+
+
+<button class="waves-effect waves-light btn" data-target="#editModal" data-toggle="modal" rel="tooltip"  type="button" data-original-title="" style="color: white;
+    background-color: #48b3af;"  (click)="editProduit()" >modifier un produit</button>
+
+</form>
+
+</div>
+<div *ngIf="ok" >  modification terminé avec succés ! </div>
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un produit</h4>
+            </div>
+            <!--Body-->
+            <form  >
+            <div class="modal-body">
+                <br>
+               
+              <div class="form-group row"  >
+
+              <div class="col-sm-9">
+               <input type="text" class="form-control" name="designation" [(ngModel)]="designation" placeholder="designation" />
+               </div>
+                </div>
+              <div class="form-group row" >
+
+                 <div class="col-sm-9">
+                 <input type="number" class="form-control" name="prix" [(ngModel)]="prix"  placeholder="prix" />
+                     </div>
+                       </div>
+
+                         <div class="form-group row" >
+
+                 <div class="col-sm-9">
+                      <input type="number" class="form-control" name="quantite" [(ngModel)]="quantite"  placeholder="quantite" />
+                  </div>
+                  </div>
+
+                                      
+                  <div class="form-group row">
+                     <button class="btn waves-effect waves-light" style="background-color: #48b3af;
+                    margin-left: 350px;
+                    color: white;" (click)="validerEditProduit()" data-dismiss="modal" >Valider</button>
+                    <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                
+                    color: white;" data-dismiss="modal"   >Quitter</button>
+                  </div>
+                        
+              </div>           
+            </form>  
+    
+</div>
+
+
+
+
+

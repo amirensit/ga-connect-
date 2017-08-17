@@ -1,0 +1,157 @@
+
+
+<div class="col-md-6" style="margin-top: 4%" >
+
+
+      <div class="md-form input-group" style="margin-left: 40%" >
+          <span class="input-group-btn">
+              <button type="button" class="btn btn-default" (click)="showAllProducts()">{{show}} list all product</button>
+          </span>
+        
+      </div>
+
+
+<table class="table" *ngIf="showProducts" >
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>designation</th>
+            <th>prix</th>
+            <th>quantite</th>
+            <th> Edit  </th>
+        </tr>
+        
+    </thead>
+    <tbody>
+        
+
+        <tr *ngFor="let post of produits"  >
+            <th scope="row"  >{{post.id}}</th>
+            <td> {{post.designation}} </td>
+            <td>  {{post.prix}}      </td>
+            <td>  {{post.quantite}}      </td>
+             <td>
+                
+                <a data-target="#editModal" class="teal-text" (click)="editProduit(post.id)" data-toggle="modal" ><i class="fa fa-pencil"></i></a>
+                <a data-target="#deleteModal" (click)="aaa(post.id)" data-toggle="modal" class="red-text"><i class="fa fa-times"></i></a>
+            </td>
+
+
+
+
+
+
+
+        
+        </tr>
+        
+
+    </tbody>
+</table>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+        <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                        color: #3b678e;">Suppresion d'un produit</h4>
+                </div>
+                <!--Body-->
+                <form  >
+                    <div class="modal-body">
+                        <br>
+                    
+                        voulez vous vraiment supprimer ce produit ?
+        
+                                
+
+                                            
+                        <div class="form-group row">
+                            <button class="btn waves-effect waves-light" style="background-color: #48b3af;margin-left: 350px;color: white;"
+                            (click)="validerSupprimerProduit(n)" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                        </div>
+                                
+                    </div>           
+                </form>  
+        
+                </div>
+        </div>
+</div>    
+
+
+
+
+
+
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un produit</h4>
+            </div>
+            <!--Body-->
+            <form  >
+                <div class="modal-body">
+                    <br>
+                
+                <div class="form-group row"  >
+
+                <div class="col-sm-9">
+                <input type="text" class="form-control" name="designation" [(ngModel)]="designation" placeholder="designation" />
+                </div>
+                    </div>
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                    <input type="number" class="form-control" name="prix" [(ngModel)]="prix"  placeholder="prix" />
+                        </div>
+                        </div>
+
+                            <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" name="quantite" [(ngModel)]="quantite"  placeholder="quantite" />
+                    </div>
+                    </div>
+
+                                        
+                    <div class="form-group row">
+                        <button class="btn waves-effect waves-light" style="background-color: #48b3af;
+                        margin-left: 350px;
+                        color: white;" (click)="validerEditProduit()" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>

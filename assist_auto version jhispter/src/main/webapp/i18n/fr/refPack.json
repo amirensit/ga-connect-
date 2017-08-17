@@ -1,0 +1,29 @@
+{
+    "assistanceApp": {
+        "refPack" : {
+            "home": {
+                "title": "RefPacks",
+                "createLabel": "Créer un nouveau Ref Pack",
+                "createOrEditLabel": "Créer ou éditer un Ref Pack",
+                "search": "Recherche pour Ref Pack"
+            },
+            "created": "Un nouveau Ref Pack a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ref Pack avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ref Pack avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ref Pack {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ref Pack"
+            },
+            "nom": "Nom",
+            "description": "Description",
+            "maxServices": "Max Services",
+            "maxKil": "Max Kil",
+            "isBloque": "Is Bloque",
+            "contrat": "Contrat",
+            "typeService": "Type Service",
+            "compagnie": "Compagnie"
+        }
+    }
+}

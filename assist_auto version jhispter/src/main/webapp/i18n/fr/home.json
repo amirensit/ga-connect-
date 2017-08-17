@@ -1,0 +1,16 @@
+{
+    "home": {
+        "title": "Bienvenue,",
+        "subtitle": "Ceci est votre page d'accueil",
+        "logged": {
+            "message": "Vous êtes connecté en tant que \"{{username}}\"."
+        },
+        "question": "Si vous avez des questions :",
+        "link": {
+            "mail": "contact@gaconnecte.com",
+            "homepage": "GA Connecté"
+        },
+        "like": "Si vous aimez JHipster, donnez nous une étoile sur",
+        "github": "GitHub "
+    }
+}

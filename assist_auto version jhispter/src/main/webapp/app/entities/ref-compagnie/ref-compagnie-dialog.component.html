@@ -1,0 +1,98 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRefCompagnieLabel" jhiTranslate="assistanceApp.refCompagnie.home.createOrEditLabel">Create or edit a Ref Compagnie</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]=true>
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="refCompagnie.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.numero" for="field_numero">Numero</label>
+            <input type="number" class="form-control" name="numero" id="field_numero"
+                [(ngModel)]="refCompagnie.numero" required />
+            <div [hidden]="!(editForm.controls.numero?.dirty && editForm.controls.numero?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.numero?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.numero?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.nom" for="field_nom">Nom</label>
+            <input type="text" class="form-control" name="nom" id="field_nom"
+                [(ngModel)]="refCompagnie.nom" required maxlength="60" pattern="^[A-Za-z ]+$" />
+            <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nom?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 60 }">
+                   This field cannot be longer than 60 characters.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.nom?.errors?.pattern" jhiTranslate="entity.validation.pattern" translateValues="{ pattern: 'Nom' }">
+                    This field should follow pattern for "Nom".
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.isBloque" for="field_isBloque">Is Bloque</label>
+            <input type="checkbox" class="form-control" name="isBloque" id="field_isBloque"
+                [(ngModel)]="refCompagnie.isBloque"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.adresse" for="field_adresse">Adresse</label>
+            <input type="text" class="form-control" name="adresse" id="field_adresse"
+                [(ngModel)]="refCompagnie.adresse" required />
+            <div [hidden]="!(editForm.controls.adresse?.dirty && editForm.controls.adresse?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.adresse?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.latitude" for="field_latitude">Latitude</label>
+            <input type="text" class="form-control" name="latitude" id="field_latitude"
+                [(ngModel)]="refCompagnie.latitude"  />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="assistanceApp.refCompagnie.longitude" for="field_longitude">Longitude</label>
+            <input type="text" class="form-control" name="longitude" id="field_longitude"
+                [(ngModel)]="refCompagnie.longitude"  />
+        </div>
+
+        <div class="form-group">
+            <label jhiTranslate="assistanceApp.refCompagnie.ville" for="field_ville">Ville</label>
+            <select class="form-control" id="field_ville" name="ville" [(ngModel)]="refCompagnie.ville">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="sysVilleOption.id === refCompagnie.ville?.id ? refCompagnie.ville : sysVilleOption" *ngFor="let sysVilleOption of villes; trackBy: trackSysVilleById">{{sysVilleOption.nom}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label jhiTranslate="assistanceApp.refCompagnie.pack" for="field_pack">Pack</label>
+            <select class="form-control" id="field_pack" multiple name="pack" [(ngModel)]="refCompagnie.packs">
+                <option [ngValue]="getSelected(refCompagnie.packs, refPackOption)" *ngFor="let refPackOption of refpacks; trackBy: trackRefPackById">{{refPackOption.nom}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,23 @@
+{
+    "assistanceApp": {
+        "refTypeService" : {
+            "home": {
+                "title": "Ref Type Services",
+                "createLabel": "Create a new Ref Type Service",
+                "createOrEditLabel": "Create or edit a Ref Type Service",
+                "search": "Search for Ref Type Service"
+            },
+            "created": "A new Ref Type Service is created with identifier {{ param }}",
+            "updated": "A Ref Type Service is updated with identifier {{ param }}",
+            "deleted": "A Ref Type Service is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ref Type Service {{ id }}?"
+            },
+            "detail": {
+                "title": "Ref Type Service"
+            },
+            "nom": "Nom",
+            "pack": "Pack"
+        }
+    }
+}

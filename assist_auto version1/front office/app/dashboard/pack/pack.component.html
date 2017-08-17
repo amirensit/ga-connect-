@@ -1,0 +1,299 @@
+<div class="main-content">
+  <a class="red-text"  >
+  </a>
+
+    <div class="col-md-12">
+        <div class="card card-nav-tabs" >
+            <div class="card-header" data-background-color="orange" >
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Packs:</span>
+                         <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#profile" (click)="afficherPartieListe()" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Liste des packs
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#ajout" (click)="afficherPartieAjoutPack()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Ajout d'un pack
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="card-content">
+            <div *ngIf="partieAffiche" id="profile" class="card-content table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-danger">
+                        <tr>
+                            
+                            <td> <i class="material-icons" >search</i> <input class="form-control" placeholder="chercher  nom pack" style="margin-top: -70px;    margin-left: 18px;" type="text"  [(ngModel)]="filtre.nom_pack"  >  </td>
+                            <td> <i class="material-icons" >search</i>  <input class="form-control"  style="margin-top: -70px;    margin-left: 18px;" type="text"  [(ngModel)]="filtre.description" placeholder="chercher  description" >  </td>
+                            <td> <i class="material-icons" >search</i>  <input class="form-control" style="margin-top: -70px;    margin-left: 18px;" type="text"  [(ngModel)]="filtre.nbre_max_service" placeholder="chercher  nbre service" > </td>
+                            <td> <i class="material-icons" >search</i>  <input class="form-control" style="margin-top: -70px;    margin-left: 18px;" type="text"  [(ngModel)]="filtre.kilometrage_max" placeholder="chercher  kilometrage max" >   </td>
+                            <td></td>
+                            <td> </td>
+                            
+                        </tr>
+
+                        <tr>
+                            <th>nom pack</th>
+                            <th>description</th>
+                            <th>nbre service</th>
+                            <th>kilometrage max</th>
+                            <th>etat</th>
+                            
+                            <th>Edit</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let pack of packs |filterBy: filtre">
+
+                                
+                                <td>{{pack.nom_pack}}</td>
+                                <td>{{pack.description}}</td>
+                                <td>{{pack.nbre_max_service}}</td>
+                                <td>{{pack.kilometrage_max}}</td>
+                                <td *ngIf="pack.etat" >active</td>
+                                <td *ngIf="!pack.etat">  bloqué  </td>
+                                
+                                <td>
+                                    
+                                        <button type="button" rel="tooltip" title="Mise A jour" (click)="editPack(pack.id_pack)" class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                            <i class="material-icons">create</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Suppression " (click)="recupererIdPack(pack.id_pack)"  class="btn btn-danger btn-simple btn-xs" data-target="#deleteModal" data-toggle="modal">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
+                                </td>
+                                
+                            </tr>
+                    </tbody>
+                </table>
+                
+                    
+
+
+            </div>
+
+            <!--  -->
+<div *ngIf="partieAjout" class="tab-pane"  id="ajout">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-content">
+                    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)" >
+                        <div class="row">
+                            
+                           
+                           
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >nom_pack</label>
+                                    <input required pattern="^[a-zA-Z ]+$" #field1="ngModel" [rangeLength]="[1,60 ]"  type="text" class="form-control" name="nom_packForAjout" [(ngModel)]="nom_packForAjout" #field1="ngModel" [rangeLength]="[1,60 ]">
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field1.errors?.rangeLength">la longueur doit être entre 0 et 60 caractères</p>
+                                    <p *ngIf="field1.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (60 caractères max)</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field1.errors?.rangeLength">la longueur ne doit pas dépasser 60 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >description</label>
+                                    <input required #field2="ngModel" [rangeLength]="[1,2000 ]" type="text" class="form-control" name="descriptionForAjout" [(ngModel)]="descriptionForAjout" >
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field2.errors?.rangeLength">la longueur ne doit pas dépasser 2000 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        
+                    
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >nbre max service</label>
+                                    <input required placeholder="illimité"  type="number" #field3="ngModel" [min]="0" [max]="99" class="form-control" name="nbre_max_serviceForAjout" [(ngModel)]="nbre_max_serviceForAjout" >
+                                    <p class="alert alert danger" style="background-color: #ffbb33"  *ngIf="field3.errors?.max">ce champs ne doit pas dépasser 99</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33"  *ngIf="field3.errors?.min">ce champs doit être entre 0 et 99</p>
+                                </div>
+                            </div>
+                        </div>
+
+                
+                <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label >kilometrage max</label>
+                                    <input required placeholder="illimité"  type="number" #field4="ngModel" [min]="0" [max]="99"  class="form-control" name="kilometrage_maxForAjout" [(ngModel)]="kilometrage_maxForAjout" >
+                                    <p class="alert alert danger" style="background-color: #ffbb33"  *ngIf="field4.errors?.max">ce champs ne doit pas dépasser 99</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33"  *ngIf="field4.errors?.min">ce champs doit être entre 0 et 99</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <button type="submit" [disabled]="!addForm.form.valid" class="btn btn-primary btn-round waves-effect waves-light " (click)="ajouterPack()" [disabled]="!addForm.form.valid">Ajouter pack</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+</div>
+            <!--  -->
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                        color: #3b678e;">Suppression d'un pack</h4>
+                </div>
+                <!--Body-->
+                <form  >
+                    <div class="modal-body">
+                        <br>
+                    
+                        voulez vous vraiment supprimer ce pack ?
+        
+                                
+
+                                            
+                        <div class="form-group row">
+                            <button class="btn waves-effect waves-light" style="background-color: #48b3af;margin-left: 350px;color: white;"
+                            (click)="validerSupprimerPack(n)" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                        </div>
+                                
+                    </div>           
+                </form>  
+        
+            </div>
+    </div>
+</div>
+
+
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un client</h4>
+            </div>
+            <!--Body-->
+            <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)"  >
+                <div class="modal-body">
+                    <br>
+                
+                <div class="form-group row"  >
+
+                        <div class="col-sm-9">
+                            <label>nom pack</label>
+                            <input type="text"  name="nom_pack" [(ngModel)]="nom_pack" placeholder="nom_pack"   class="form-control"    />
+                        
+                        </div>
+                </div>
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <label>description</label>
+                        <input type="text" class="form-control" name="description" [(ngModel)]="description"  placeholder="description" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <label>Nombre max de service</label>
+                        <input type="number" class="form-control" name="nbre_max_service" [(ngModel)]="nbre_max_service"  placeholder="nbre_max_service" />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <label>kilométrage max</label>
+                        <input type="number" class="form-control" name="kilometrage_max" [(ngModel)]="kilometrage_max"  placeholder="kilometrage_max" />
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <div class="checkbox">
+                        <label rel="tooltip" title="bloquer">
+                            <input type="checkbox" [checked]="bloquerOk"   (change)="bloquerPack($event.target.checked)"     >
+                        </label>
+                            <label>   bloquer       </label>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="checkbox">
+                            <label rel="tooltip" title="debloquer">
+                                <input type="checkbox" [checked]="debloquerOk"   (change)="debloquerPack($event.target.checked)"     >
+                            </label>
+                            <label>   debloquer       </label>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group row">
+                        <button class="btn btn-primary btn-round waves-effect waves-light"  (click)="validerEditPack()" data-dismiss="modal" [disabled]="!addForm.form.valid" >Valider</button>
+                        <button class="btn btn-danger btn-round waves-effect waves-light"  data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>
+
+
+
+
+

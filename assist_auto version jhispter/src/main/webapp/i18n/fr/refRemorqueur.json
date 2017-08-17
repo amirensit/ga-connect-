@@ -1,0 +1,30 @@
+{
+    "assistanceApp": {
+        "refRemorqueur" : {
+            "home": {
+                "title": "RefRemorqueurs",
+                "createLabel": "Créer un nouveau Ref Remorqueur",
+                "createOrEditLabel": "Créer ou éditer un Ref Remorqueur",
+                "search": "Recherche pour Ref Remorqueur"
+            },
+            "created": "Un nouveau Ref Remorqueur a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ref Remorqueur avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ref Remorqueur avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ref Remorqueur {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ref Remorqueur"
+            },
+            "raisonSociale": "Raison Sociale",
+            "numEtablissement": "Num Etablissement",
+            "codeCategorie": "Code Categorie",
+            "codeTVA": "Code TVA",
+            "matriculeFiscal": "Matricule Fiscal",
+            "adresse": "Adresse",
+            "latitude": "Latitude",
+            "longitude": "Longitude",
+            "contact": "Contact"
+        }
+    }
+}

@@ -1,0 +1,31 @@
+
+<div *ngIf="contact">
+    <h2><span jhiTranslate="assistanceApp.contact.detail.title">Contact</span> {{contact.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="assistanceApp.contact.isGerant">Is Gerant</span></dt>
+        <dd>
+            <span>{{contact.isGerant}}</span>
+        </dd>
+        <dt><span jhiTranslate="assistanceApp.contact.personne">Personne</span></dt>
+        <dd>
+            <div *ngIf="contact.personne">
+                <a [routerLink]="['/personne', contact.personne?.id]">{{contact.personne?.nom}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'contact/'+ contact.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,29 @@
+{
+    "assistanceApp": {
+        "refPack" : {
+            "home": {
+                "title": "Ref Packs",
+                "createLabel": "Create a new Ref Pack",
+                "createOrEditLabel": "Create or edit a Ref Pack",
+                "search": "Search for Ref Pack"
+            },
+            "created": "A new Ref Pack is created with identifier {{ param }}",
+            "updated": "A Ref Pack is updated with identifier {{ param }}",
+            "deleted": "A Ref Pack is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ref Pack {{ id }}?"
+            },
+            "detail": {
+                "title": "Ref Pack"
+            },
+            "nom": "Nom",
+            "description": "Description",
+            "maxServices": "Max Services",
+            "maxKil": "Max Kil",
+            "isBloque": "Is Bloque",
+            "contrat": "Contrat",
+            "typeService": "Type Service",
+            "compagnie": "Compagnie"
+        }
+    }
+}

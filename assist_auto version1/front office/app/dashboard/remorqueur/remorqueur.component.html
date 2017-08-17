@@ -1,0 +1,387 @@
+
+
+
+
+<div class="main-content">
+  <a class="red-text"  >
+    
+                                                        
+</a>
+
+    <div class="col-md-12">
+        <div class="card card-nav-tabs" >
+            <div class="card-header" data-background-color="orange" >
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <span class="nav-tabs-title">Remorqueurs:</span>
+                         <ul class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#profile" (click)="afficherPartieListe()" data-toggle="tab">
+                                    <i class="material-icons">bug_report</i>
+                                    Liste des remorqueurs
+                                    <div class="ripple-container"></div>
+                                </a>
+                            </li>
+
+                            <li class="">
+                                <a href="#ajout" (click)="afficherPartieAjoutRemorqueur()" data-toggle="tab">
+                                    <i class="material-icons">code</i>
+                                    Ajout d'un Remorqueur
+                                <div class="ripple-container"></div>
+                                </a>
+                            </li>
+                         </ul>
+                    </div>
+                </div>
+            </div>
+        <div class="card-content">
+            <div *ngIf="partieAffiche" id="profile" class="card-content table-responsive">
+                <table class="table table-hover">
+                    <thead class="text-danger">
+                        <tr>
+                            
+                            <th>matricule fiscal</th>
+                            <th>nom_contact</th>
+                            <th>prenom_contact</th>
+                            <th> raison social </th> 
+                            <th> tel </th>
+                            <th>etat </th>
+                            <th >Ville </th>
+                            <th>Edit </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  *ngFor="let remorqueurs of remorqueurs ">
+
+                                
+                                <td>{{remorqueurs.matricule_fiscal}}</td>
+                                <td>{{remorqueurs.nom_contact}}</td>
+                                <td>{{remorqueurs.prenom_contact}}</td>
+                                <td>{{remorqueurs.raison_social}}</td>
+                                <td>{{remorqueurs.tel}}</td>
+                                <td *ngIf="remorqueurs.etat" >active</td>
+                                <td *ngIf="!remorqueurs.etat">  bloqué  </td>
+                                <td>{{remorqueurs.villeDTO.nom_ville}}</td>
+                                
+                                <td>
+                                    
+                                
+                                        <button type="button" rel="tooltip" title="Mise A jour" (click)="editRemorqueur(remorqueurs.id_remorqueur)" class="btn btn-primary btn-simple btn-xs" data-target="#editModal" data-toggle="modal">
+                                            <i class="material-icons">create</i>
+                                        </button>
+                                        <button type="button" rel="tooltip" title="Suppression " (click)="recupererIdRemorqueur(remorqueurs.id_remorqueur)"  class="btn btn-danger btn-simple btn-xs" data-target="#deleteModal" data-toggle="modal">
+                                            <i class="material-icons">cancel</i>
+                                        </button>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+                
+                    
+
+
+            </div>
+
+            <!--  -->
+<div *ngIf="partieAjout" class="tab-pane"  id="ajout">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                
+                <div class="card-content">
+                    <form #addForm="ngForm" (ngSubmit)="onSubmit(addForm.value)">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">matricule_fiscal</label>
+                                    <input type="text" class="form-control" name="matricule_fiscalForAjout" [(ngModel)]="matricule_fiscalForAjout" >
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">nom_contact</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field3="ngModel" [rangeLength]="[1,50]" type="text" class="form-control" name="nom_contactForAjout" [(ngModel)]="nom_contactForAjout" >
+                                    <p *ngIf="field3.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (50 caractères max)</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field3.errors?.rangeLength">la longueur ne doit pas dépasser 50 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">prenom_contact</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field4="ngModel" [rangeLength]="[1,50]" type="text" class="form-control" name="prenom_contactForAjout" [(ngModel)]="prenom_contactForAjout" >
+                                    <p *ngIf="field4.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (50 caractères max)</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field4.errors?.rangeLength">la longueur ne doit pas dépasser 50 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">raison social</label>
+                                    <input pattern="^[a-zA-Z ]+$" #field1="ngModel" [rangeLength]="[1,50]" type="text" class="form-control" name="raison_socialForAjout" [(ngModel)]="raison_socialForAjout" >
+                                    <p *ngIf="field1.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >ce champs n'accepte que des lettres et des espaces (50 caractères max)</p>
+                                    <p class="alert alert danger" style="background-color: #ffbb33" *ngIf="field1.errors?.rangeLength">la longueur ne doit pas dépasser 50 caractères</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black label-floating is-empty">
+                                    <label class="control-label">téléphone</label>
+                                    <input pattern="^[0-9]{8}$" #field2="ngModel" type="text" class="form-control" name="telForAjout" [(ngModel)]="telForAjout" >
+                                    <p *ngIf="field2.errors?.pattern" class="alert alert danger" style="background-color: #ffbb33" >numéro de téléphone de 8 chiffre</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="checkbox">
+                                <label rel="tooltip" title="bloquer">
+                                    <input type="checkbox" [checked]="bloquerOk"  (change)="bloquerRemorqueur($event.target.checked)" >
+                                </label>
+                                    <label> bloquer  </label>
+                            </div>
+                       </div>
+                    <div class="form-group row">
+                        <div class="checkbox">
+                            <label rel="tooltip" title="debloquer">
+                                <input type="checkbox" [checked]="debloquerOk"  (change)="debloquerRemorqueur($event.target.checked)" >
+                            </label>
+                            <label>   debloquer     </label>
+                        </div>
+                    </div>
+
+                        
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">gouvernorat</label>
+                                    <select required  [(ngModel)]="gForListVille" name="gForListVille"  >
+                                        <option *ngFor="let x of gouvernorats" [ngValue]="x" >{{x.nom_gouvernorat}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="gForListVille" >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">villes</label>
+                                    <select required name="villeForAjout" [(ngModel)]="villeForAjout"  (click)="getVilleByGouvernorat()">
+                                        <option> actualiser</option>
+                                        <option *ngFor="let y of villes" [ngValue]="y"  >{{y.nom_ville}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+
+                        <button type="submit" [disabled]="!addForm.form.valid" class="btn btn-primary btn-round waves-effect waves-light " (click)="ajouterRemorqueur()">Ajouter remorqueur</button>
+                        <div class="clearfix"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+</div>
+
+</div>
+            <!--  -->
+
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="modal" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+            <div class="modal-content">
+                <!--Header-->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                        color: #3b678e;">Suppression d'un remorqueur</h4>
+                </div>
+                <!--Body-->
+                <form  >
+                    <div class="modal-body">
+                        <br>
+                    
+                        voulez vous vraiment supprimer ce remorqueur ?
+        
+                                
+
+                                            
+                        <div class="form-group row">
+                            <button class="btn waves-effect waves-light" style="background-color: #48b3af;margin-left: 350px;color: white;"
+                            (click)="validerSupprimerRemorqueur(n)" data-dismiss="modal" >Valider</button>
+                        <button class="btn waves-effect waves-light" style="background-color:#d81717;
+                    
+                        color: white;" data-dismiss="modal"   >Quitter</button>
+                        </div>
+                                
+                    </div>           
+                </form>  
+        
+            </div>
+    </div>
+</div>
+
+                            
+
+
+<div class="modal" id="editModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" style="display: none;margin-top: 150px;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <!--Content-->
+        <div class="modal-content">
+            <!--Header-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="addModalLabel" style="text-align: center;
+                    color: #3b678e;">Modification d'un remorqueur</h4>
+            </div>
+            <!--Body-->
+            <form  >
+                <div class="modal-body">
+                    <br>
+                
+                <div class="form-group row"  >
+
+                        <div class="col-sm-9">
+                            <label> matricule fiscal</label>
+                            <input type="text" class="form-control" name="matricule_fiscal" [(ngModel)]="matricule_fiscal"  />
+                        </div>
+                </div>
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <label> nom contact </label>
+                        <input type="text" class="form-control" name="nom_contact" [(ngModel)]="nom_contact"  />
+                    </div>
+                </div>
+
+                <div class="form-group row" >
+
+                    <div class="col-sm-9">
+                        <label> prenom contact </label>
+                        <input type="text" class="form-control" name="prenom_contact" [(ngModel)]="prenom_contact"  />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-black label-floating is-empty">
+                            <label >raison social</label>
+                            <input type="text" class="form-control" name="raison_social" [(ngModel)]="raison_social" >
+                        </div>
+                    </div>
+                            
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group form-black label-floating is-empty">
+                            <label >téléphone</label>
+                            <input type="text" class="form-control" name="tel" [(ngModel)]="tel" >
+                        </div>
+                    </div>
+                    
+                </div>
+
+                
+
+
+                     <div class="form-group row">
+                    <div class="checkbox">
+                        <label rel="tooltip" title="bloquer">
+                            <input type="checkbox" [checked]="bloquerOk"   (change)="bloquerRemorqueur($event.target.checked)"     >
+                        </label>
+                            <label>   bloquer       </label>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="checkbox">
+                            <label rel="tooltip" title="debloquer">
+                                <input type="checkbox" [checked]="debloquerOk"   (change)="debloquerRemorqueur($event.target.checked)"     >
+                            </label>
+                            <label>   debloquer       </label>
+                        </div>
+                    </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">gouvernorat</label>
+                                    <select  [(ngModel)]="gForListVille" name="gForListVille"  >
+                                        <option *ngFor="let x of gouvernorats" [ngValue]="x" >{{x.nom_gouvernorat}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="gForListVille" >
+                            <div class="col-md-12">
+                                <div class="form-group form-black ">
+                                    <label class="control-label">villes</label>
+                                    <select name="villeForEdit" [(ngModel)]="villeForEdit"  (click)="getVilleByGouvernorat()">
+                                        <option> actualiser</option>
+                                        <option *ngFor="let y of villes" [ngValue]="y"  >{{y.nom_ville}}</option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                     
+
+                    <div class="form-group row">
+                        <button class="btn btn-primary btn-round waves-effect waves-light" (click)="validerEditRemorqueur()" data-dismiss="modal" >Valider</button>
+                        <button class="btn btn-danger btn-round waves-effect waves-light" data-dismiss="modal"   >Quitter</button>
+                    </div>
+                            
+                </div>           
+            </form>  
+        </div>
+    </div>
+</div>
+
+
+
+
+

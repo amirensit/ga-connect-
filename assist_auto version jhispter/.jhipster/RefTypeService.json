@@ -1,0 +1,28 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "relationshipName": "pack",
+            "otherEntityName": "refPack",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "typeService"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 60
+        }
+    ],
+    "changelogDate": "20170808072643",
+    "entityTableName": "ref_type_service",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no"
+}
