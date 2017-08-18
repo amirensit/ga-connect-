@@ -1,0 +1,125 @@
+
+LONG_TEXT = 2000
+MEDUIM_TEXT = 250
+SHORT_TEXT = 60
+
+entity DossierRmq {
+	reference String,
+	distance Long,
+	observation String maxlength(LONG_TEXT)
+}
+
+entity RefCompagnie {
+	/** constraint unique to add later */
+	numero Long required,
+    nom String maxlength(SHORT_TEXT) required pattern("^[A-Za-z ]+$"),
+    isBloque Boolean,
+    adresse String required,
+    latitude String,
+    longitude String
+}
+
+entity RefPack {
+	nom String maxlength(SHORT_TEXT) required pattern("^[A-Za-z ]+$"),
+    description String maxlength(LONG_TEXT),
+    maxServices Long max(90),
+    maxKil Long max(9999),
+    isBloque Boolean
+}
+
+entity RefRemorqueur {
+	raisonSociale String required maxlength(SHORT_TEXT)
+	numEtablissement String minlength(3) maxlength(3),
+    codeCategorie String minlength(1) maxlength(1),
+    codeTVA String minlength(1) maxlength(1),
+    matriculeFiscal String required minlength(9) maxlength(9),	
+    adresse String required,
+    latitude String,
+    longitude String
+}
+
+entity Personne {
+    prenom String required,
+    nom String required,
+    telPrincipal Long required,
+    autreTel Long,
+    fax Long,
+    mailPrincipal String,
+    autreMail String,
+    adresse String required,
+    latitude String,
+    longitude String
+}
+
+entity Contact {
+	isGerant Boolean
+}
+
+entity Assuree {
+
+}
+
+entity Contrat {
+	numero Long required,
+    debut LocalDate required,
+    fin LocalDate required
+}
+
+entity Voiture {
+	immatriculation String required pattern("\d{4}TU\d+"),
+	miseCirculation LocalDate required,
+    puissanceFiscale Long
+}
+
+entity RefMarque {
+	nom String required maxlength(SHORT_TEXT)
+} 
+
+entity RefTypeService {
+	nom String required  maxlength(SHORT_TEXT)
+} 
+
+entity SysVille {
+	nom String required  maxlength(SHORT_TEXT)
+}
+
+entity SysZoneGeographique {
+	nom String required  maxlength(SHORT_TEXT)
+}
+
+entity SysGouvernorat {
+	nom String required  maxlength(SHORT_TEXT)
+}
+
+relationship OneToOne {
+	DossierRmq{assuree(nom)} to Assuree,
+	DossierRmq{typeService(nom)} to RefTypeService,
+	Assuree{personne(nom)} to Personne,
+	Personne{ville(nom)} to SysVille,
+	Contact{personne(nom)} to Personne,
+    RefCompagnie{ville(nom)} to SysVille,
+    Contrat{voiture(immatriculation)} to Voiture{contrat}
+}
+
+relationship OneToMany {
+    Assuree{contrat} to Contrat{assure(nom)},
+	SysGouvernorat{ville} to SysVille{gouvernorat(nom) required},
+    SysZoneGeographique{gouvernorat} to SysGouvernorat{zoneGeographique(nom)},
+	RefPack{contrat} to Contrat{pack(nom)},
+	RefCompagnie{contrat} to Contrat{compagnie(nom)},
+    Contact{remorqueur} to RefRemorqueur{contact(nom)}
+}
+
+relationship ManyToOne {
+    Voiture{marque(nom)} to RefMarque,
+	DossierRmq{lieu(nom)} to SysVille,
+	DossierRmq{destination(nom)} to SysVille,
+	DossierRmq{remorqueur(raisonSociale)} to RefRemorqueur
+}
+
+relationship ManyToMany {
+	RefCompagnie{pack(nom)} to RefPack{compagnie(nom)},
+    RefPack{typeService(nom)} to RefTypeService{pack(nom)}
+}
+
+

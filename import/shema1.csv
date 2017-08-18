@@ -1,0 +1,12 @@
+sudo netstat -lpn |grep :8080
+
+
+git init 
+git remote add origin ssh://git@git.ga.local:2222/b.aouadi/assistance.git	
+
+git checkout -b amir
+git pull origin amir
+
+
+ssh://git@git.ga.local:2222/b.aouadi/assistance.git
+
